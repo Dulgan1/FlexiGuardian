@@ -29,8 +29,9 @@ class BaseModel:
                                      self.id, self.__dict__)
 
     def to_dict(self) -> dict:
-        temp = self.__dict__.copy
+        """Returns a dictionary of class instance"""
+        temp = self.__dict__.copy()
         temp['created_at'] = datetime.isoformat(temp['created_at'])
-        temp['updated_at'] = datetime.isoformat(temo['updated_at'])
+        temp['updated_at'] = datetime.isoformat(temp['updated_at'])
         temp['__class__'] = self.__class__.__name__
         return temp
