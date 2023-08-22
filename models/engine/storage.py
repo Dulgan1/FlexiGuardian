@@ -25,10 +25,11 @@ class Storage:
         FG_MYSQL_PWD = getenv('FG_MYSQL_PWD')
         FG_MYSQL_HOST = getenv('FG_MYSQL_HOST')
         FG_MYSQL_DB = getenv('FG_MYSQL_DB')
-        __engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format(FG_MYSQL_USER,
-                                                                      FG_MYSQL_PWD,
-                                                                      FG_MYSQL_HOST,
-                                                                      FG_MYSQL_DB))
+        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format(
+            FG_MYSQL_USER,
+            FG_MYSQL_PWD,
+            FG_MYSQL_HOST,
+            FG_MYSQL_DB))
 
     def all(seld, cls=None):
         """Gets all objects in data of passed class cls"""
