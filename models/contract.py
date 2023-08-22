@@ -6,6 +6,7 @@ from sqlalchemy.orm import relationship
 
 
 class Contract(BaseModel, Base):
+    __tablename__ = "contracts"
     def __init__(self):
         pass
 
