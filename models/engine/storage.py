@@ -84,7 +84,7 @@ if __name__ == "__main__":
     FG_MYSQL_USER = getenv('FG_MYSQL_USER')
     FG_MYSQL_PWD = getenv('FG_MYSQL_PWD')
     FG_MYSQL_HOST = getenv('FG_MYSQL_HOST')
-    FG_MYSQL_DB = getenv('FG_MySQL_DB')
+    FG_MYSQL_DB = getenv('FG_MYSQL_DB')
     __engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format(FG_MYSQL_USER,
                                                                       FG_MYSQL_PWD,
                                                                       FG_MYSQL_HOST,
