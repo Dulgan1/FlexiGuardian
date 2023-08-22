@@ -6,4 +6,6 @@ from sqlalchemy.orm import relationship
 
 
 class Contract(BaseModel, Base):
+    def __init__(self):
+        pass
 
