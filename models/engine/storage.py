@@ -1,4 +1,4 @@
-i#!/usr/bin/python3
+#!/usr/bin/python3
 """Defines and specifies connection to Storage engine MySQL"""
 import models
 from models.address import Address
