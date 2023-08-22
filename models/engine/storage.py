@@ -77,3 +77,22 @@ class Storage:
     def close(self):
         """Closes db connection"""
         self.__session.remove()
+
+
+if __name__ == "__main__":
+    """Test for DB connections"""
+    FG_MYSQL_USER = getenv('FG_MYSQL_USER')
+    FG_MYSQL_PWD = getenv('FG_MYSQL_PWD')
+    FG_MYSQL_HOST = getenv('FG_MYSQL_HOST')
+    FG_MYSQL_DB = getenv('FG_MySQL_DB')
+    __engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format(FG_MYSQL_USER,
+                                                                      FG_MYSQL_PWD,
+                                                                      FG_MYSQL_HOST,
+                                                                      FG_MYSQL_DB))
+
+    Base.metadata.create_all(__engine)
+    sess_factory = sessionmaker(__engine, expire_on_commit=False)
+    Session = scoped_session(sess_factory)
+    __session = Session
+    __session.query(classes['User']).all()
+    __session.remove()
