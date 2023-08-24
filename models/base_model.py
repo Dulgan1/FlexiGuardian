@@ -21,12 +21,14 @@ class BaseModel:
                     setattr(self, k, v)
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        self.updated_at = self.created_at
 
     def __str__(self):
+        obj_dict = self.to_dict()
         "Returns string representation of BaseModel instance"""
-        return "[{}] ({}) {}".format(self.__class__.__name__,
-                                     self.id, self.__dict__)
+        return "[{}] ({}) {}\n [ObjectDictionary] {}".format(
+                self.__class__.__name__,
+                self.id, self.__dict__, obj_dict)
 
     def to_dict(self) -> dict:
         """Returns a dictionary of class instance"""
@@ -35,3 +37,9 @@ class BaseModel:
         temp['updated_at'] = datetime.isoformat(temp['updated_at'])
         temp['__class__'] = self.__class__.__name__
         return temp
+
+    def save(self):
+        """Saves instance to storage(Database)"""
+        self.updated_at = datetime.now()
+        models.storage.new(self)
+        models.storage.save()

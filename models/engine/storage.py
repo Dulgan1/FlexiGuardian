@@ -5,14 +5,14 @@ from models.address import Address
 from models.base_model import Base, BaseModel
 from models.business import Business
 from models.contract import Contract
-from models.user import User
+from models.user import User, Review
 from os import getenv
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
 classes = {'Address': Address, 'Business': Business, 'Contract': Contract,
-           'User': User}
+           'Review': Review, 'User': User}
 
 class Storage:
     """The storage class for saving, reloading and creating datain database"""
