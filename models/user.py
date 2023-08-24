@@ -11,7 +11,7 @@ class User(BaseModel, Base):
     user_name = Column(String(15), nullable=False)
     email = Column(String(128), nullable=False)
     phone = Column(String(15), nullable=False)
-    business = relationship('Business' backref='user')
+    business = relationship('Business', backref='user')
     image_url = Column(String(500))
     password = Column(String(128), nullable=False)
     rating = Column(Float, default=0.0)
