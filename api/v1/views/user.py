@@ -27,8 +27,8 @@ def login():
     if check_password_hash(user.password, password):
         session['user_id'] = user_id
         session['user_name'] = user.user_name
-        token = jwt.encode('user_id': user_id,
-                           'exp': datetime.now() + datetime.timedelta(minutes=30),
+        token = jwt.encode({'user_id': user_id,
+                           'exp': datetime.now() + datetime.timedelta(minutes=30)},
                            app.config['SECRET_KEY'])
         return jsonify('token': token.decode('UTF-8'))
 
