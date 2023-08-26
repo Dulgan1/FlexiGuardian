@@ -7,7 +7,7 @@ def requires_token(f):
     @wraps(f)
     def decorator(*args, **kwargs):
         _session = storage.session()
-        if 'user_id', 'user_name' in session:
+        if 'user_id' in session and 'user_name' in session:
             user_name = session['user_name']
             return f(user_name, *args, **kwargs)
         token = None
