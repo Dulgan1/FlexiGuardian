@@ -31,7 +31,7 @@ class Storage:
             FG_MYSQL_HOST,
             FG_MYSQL_DB))
 
-    def all(seld, cls=None):
+    def all(self, cls=None):
         """Gets all objects in data of passed class cls"""
         temp_dict = {}
         for clss in classes:
@@ -42,6 +42,11 @@ class Storage:
                     new_dict[key] = obj
         return (new_dict)
 
+    @property
+    def session(self):
+        return self.__session
+
+    @session.setter
     def reload(self):
         """Loads data from database"""
         Base.metadata.create_all(self.__engine)
@@ -63,7 +68,7 @@ class Storage:
             self.__session.delete(obj)
             return "Success"
         else:
-            return "Failed"
+            return "Failed, Null object"
 
     def get(self, cls, id):
         """Gets data linked to id and of class cls"""
@@ -74,6 +79,13 @@ class Storage:
         for value in all_cls.values():
             if (value.id == id):
                 return value
+    def get_id(self, cls, data):
+        """Gets object id by data of object, applies only User class for now"""
+        if data and cls in classes.keys():
+            clss = classes.get(cls)
+            obj = self.__session.query(clss).filter_by(name=data).first()
+            return obj.id
+        return None
 
     def close(self):
         """Closes db connection"""

@@ -8,6 +8,7 @@ from sqlalchemy.orm import relationship
 class User(BaseModel, Base):
     """ User Class Defined """
     __tablename__ = 'users'
+    name = Column(String(60), nullable=False)
     user_name = Column(String(15), nullable=False)
     email = Column(String(128), nullable=False)
     phone = Column(String(15), nullable=False)
