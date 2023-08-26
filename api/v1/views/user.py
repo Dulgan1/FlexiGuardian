@@ -22,6 +22,8 @@ def login():
     email = data.get('email')
     password = data.get('password')
     user_id = storage.get_id('User', email)
+    if not user_id:
+        return make_response(jsonify({'message': 'User with email not registered'}))
     user = storage.get(User, user_id)
 
     if check_password_hash(user.password, password):
@@ -120,7 +122,7 @@ def guess_profile_view(user_name):
     status_code = full_dict.get('status', 501)
     return make_response(jsonify(full_dict), status_code)
 
-@api_views.route('/user/<user_name>/profile',
+@api_views.route('/users/<user_name>/profile',
                  methods=['GET', 'PUT'], strict_slashes=False)
 @requires_token
 def profile_ract(user_name):
