@@ -82,7 +82,7 @@ class Storage:
         if data and cls in classes.keys():
             clss = classes.get(cls)
             obj = self.__session.query(clss).filter_by(name=data).first()
-            return obj.id
+            return obj
         return None
 
     def close(self):

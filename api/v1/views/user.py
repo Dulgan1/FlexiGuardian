@@ -21,9 +21,10 @@ def login():
     data = request.get_json()
     email = data.get('email')
     password = data.get('password')
-    user_id = storage.get_id('User', email)
-    if not user_id:
+    user = storage.get_id('User', email)
+    if not user:
         return make_response(jsonify({'message': 'User with email not registered'}))
+    user_id = user.id
     user = storage.get(User, user_id)
 
     if check_password_hash(user.password, password):
