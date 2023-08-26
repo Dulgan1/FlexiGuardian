@@ -1,6 +1,6 @@
 #!/usr/bin/python
 from api.v1.views import api_views
-from api.v1.token import requires_token
+from api.v1.views.token import requires_token
 from datetime import datetime
 from flask import abort, jsonify, make_response, request, session
 import jwt
