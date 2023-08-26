@@ -42,11 +42,9 @@ class Storage:
                     new_dict[key] = obj
         return (new_dict)
 
-    @property
     def session(self):
         return self.__session
 
-    @session.setter
     def reload(self):
         """Loads data from database"""
         Base.metadata.create_all(self.__engine)
