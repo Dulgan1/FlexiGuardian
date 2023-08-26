@@ -13,7 +13,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 def login():
     if not request.get_json():
         abort(400, 'Not a JSON')
-    elif not 'email', 'password' in request.get_json().keys():
+    elif 'email' not in request.get_json().keys()\
+            and 'password' not in request.get_json().keys():
         return make_response(jsonify(
             {'message': 'invalid data for authorization'}),
                              400)
