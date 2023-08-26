@@ -30,7 +30,7 @@ def login():
         token = jwt.encode({'user_id': user_id,
                            'exp': datetime.now() + datetime.timedelta(minutes=30)},
                            app.config['SECRET_KEY'])
-        return jsonify('token': token.decode('UTF-8'))
+        return jsonify({'token': token.decode('UTF-8')})
 
     return make_response(jsonify('message': 'Could not verify', 400))
 
