@@ -32,7 +32,7 @@ def login():
                            app.config['SECRET_KEY'])
         return jsonify({'token': token.decode('UTF-8')})
 
-    return make_response(jsonify('message': 'Could not verify', 400))
+    return make_response(jsonify({'message': 'Could not verify'}), 400)
 
 @api_views.route('/register', methods=['POST'], strict_slashes=False)
 def register():
