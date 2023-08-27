@@ -39,8 +39,8 @@ class Storage:
                 objs = self.__session.query(classes[clss]).all()
                 for obj in objs:
                     key = obj.__class__.__name__ + '.' + obj.id
-                    new_dict[key] = obj
-        return (new_dict)
+                    temp_dict[key] = obj
+        return (temp_dict)
 
     def session(self):
         return self.__session
