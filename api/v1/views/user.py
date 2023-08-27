@@ -80,7 +80,7 @@ def register():
                     user_name=user_name, phone=phone,
                     password=password)
 
-    storage.add(new_user)
+    storage.new(new_user)
     storage.save()
 
     return make_response(jsonify({'message': 'user {} is registered successfully'}),
