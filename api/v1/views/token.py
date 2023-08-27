@@ -14,7 +14,7 @@ def requires_token(f):
             return f(user_name, *args, **kwargs)
         token = None
         if 'x-access-tokens' in request.headers:
-            token = request.headers['x-access-tokens']
+            token = request.headers['x-access-tokens'].split(" ")[1]
 
         try:
             data = jwt.decode(token, getenv('FG_SECRET_KEY'))
