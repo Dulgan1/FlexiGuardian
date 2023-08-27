@@ -43,9 +43,9 @@ def rate_contract(contract_id):
 
         new_review = Review(by_user_id=user_id, for_user_id=seller_id,
                             review=review, rating=rate)
-        calc_tot_rate(seller_id)
         storage.new(new_review)
         storage.save()
+        calc_tot_rate(seller_id)
         return make_response(jsonify({'message': 'Rated and reviews successfully'}), 200)
     return make_response(jsonify({'error': 'Error updating data'}), 501)
 
