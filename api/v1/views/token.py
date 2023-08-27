@@ -15,8 +15,6 @@ def requires_token(f):
         token = None
         if 'x-access-tokens' in request.headers:
             token = request.headers['x-access-tokens']
-        if not token:
-            return jsonify({'message': 'Invalid Token'})
 
         try:
             data = jwt.decode(token, getenv('FG_SECRET_KEY'))
