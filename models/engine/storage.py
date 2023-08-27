@@ -77,13 +77,13 @@ class Storage:
         for value in all_cls.values():
             if (value.id == id):
                 return value
-    def get_obj(self, cls, data):
+    def get_user(self,  data):
         """Gets object id by data of object, applies only User class for now"""
-        if cls in classes.keys():
-            clss = classes.get(cls)
-            obj = self.__session.query(clss).filter_by(name=data).first()
-            return obj
-        return None
+            user = self.__session.query(User).filter_by(User.email==data).first()
+            if user:
+                return user
+            else:
+                return None
 
     def close(self):
         """Closes db connection"""
