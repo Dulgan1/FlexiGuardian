@@ -21,7 +21,7 @@ def login():
     data = request.get_json()
     email = data.get('email')
     password = data.get('password')
-    user = storage.get_obj('User', email)
+    user = storage.get_user(email)
     if not user:
         return make_response(jsonify({'message': 'User with email not registered'}))
     user_id = user.id
