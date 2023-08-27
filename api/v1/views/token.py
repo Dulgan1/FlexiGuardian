@@ -21,6 +21,6 @@ def requires_token(f):
             user = _session.query(User).filter(User.id==data['user_id']).first()
             user_name = user.user_name
         except:
-            return jsonify({'message':'token is invalid'})
+            return jsonify({'message':'token is invalid2222'})
         return f(user_name, *args, **kwargs)
     return decorator
