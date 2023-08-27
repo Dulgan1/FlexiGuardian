@@ -17,7 +17,7 @@ def requires_token(f):
             if 'x-access-tokens' in request.headers:
                 token = request.headers['x-access-tokens']
         except:
-            return jsonify({'message': 'Token required')
+            return jsonify({'message': 'Token required'})
 
         try:
             data = jwt.decode(token, getenv('FG_SECRET_KEY'), algorithms=['HS256'])
