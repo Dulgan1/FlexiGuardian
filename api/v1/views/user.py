@@ -68,7 +68,7 @@ def register():
 
     acct_exists = _session.query(User).\
             filter(User.email==email).first()
-    if acct:
+    if acct_exist:
         return make_response(jsonify({'message': 'user with email already exists'}), 400)
     user_exists = _session.query(User).\
             filter(User.user_name==user_name).first()
