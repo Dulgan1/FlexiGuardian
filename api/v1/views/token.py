@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from functools import wraps
-from flask import session, jsonify
+from flask import session, jsonify, requests
 import jwt
 from models import storage
 from os import getenv
