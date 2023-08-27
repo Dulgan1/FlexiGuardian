@@ -1,7 +1,7 @@
 #!/usr/bin/python
 from api.v1.views import api_views
 from api.v1.views.token import requires_token
-from datetime import datetime
+from datetime 
 from flask import abort, jsonify, make_response, request, session
 import jwt
 from models import storage
@@ -31,7 +31,8 @@ def login():
         session['user_id'] = user_id
         session['user_name'] = user.user_name
         token = jwt.encode({'user_id': user_id,
-                           'exp': datetime.now() + datetime.timedelta(minutes=30)},
+                           'exp': datetime.datetime.now() +
+                            datetime.timedelta(minutes=30)},
                            app.config['SECRET_KEY'])
         return jsonify({'token': token.decode('UTF-8')})
 
