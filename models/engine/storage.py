@@ -79,11 +79,11 @@ class Storage:
                 return value
     def get_user(self,  data):
         """Gets object id by data of object, applies only User class for now"""
-            user = self.__session.query(User).filter_by(User.email==data).first()
-            if user:
-                return user
-            else:
-                return None
+        user = self.__session.query(User).filter_by(User.email==data).first()
+        if user:
+            return user
+        else:
+            return None
 
     def close(self):
         """Closes db connection"""
