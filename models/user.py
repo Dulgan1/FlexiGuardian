@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ Module defines both user and review class"""
 from models.base_model import BaseModel, Base
-from models import storage
 from sqlalchemy import Column, Float, Integer, String
 from sqlalchemy.orm import relationship
 
@@ -34,17 +33,3 @@ class Review(BaseModel, Base):
     def __init__(self, *args, **kwargs):
         """Initializes Review class instance"""
         super.__init__(*args, **kwargs)
-
-def calc_tot_rate(user_id):
-    user = storage.get(User, user_id)
-    _session = storage.session()
-    reviews = _session.query(Review).filter(Review.for_user_id==user_id)
-    total = 0
-    count = 0
-    for review in reviews:
-        total += review.rating
-        count += 1
-    rate_tot = total / count
-
-    user.rating = rate_tot
-    storage.save
