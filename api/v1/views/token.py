@@ -3,6 +3,8 @@ from functools import wraps
 from flask import session, jsonify
 import jwt
 from models import storage
+from os import getenv
+
 def requires_token(f):
     @wraps(f)
     def decorator(*args, **kwargs):
@@ -17,7 +19,7 @@ def requires_token(f):
             return jsonify({'message': 'Invalid Token'})
 
         try:
-            data = jwt.decode(token, app.config['SECRET_KEY'])
+            data = jwt.decode(token, getenv('FG_SECRET_KEY'))
             user = _session.query(User).filter(User.id==data['user_id']).first()
             user_name = user.user_name
         except:

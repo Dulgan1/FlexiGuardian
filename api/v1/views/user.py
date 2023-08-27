@@ -6,6 +6,7 @@ from flask import abort, jsonify, make_response, request, session
 import jwt
 from models import storage
 from models.user import User, Review
+from os import getenv
 import re
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -33,7 +34,7 @@ def login():
         token = jwt.encode({'user_id': user_id,
                            'exp': datetime.datetime.now() +
                             datetime.timedelta(minutes=30)},
-                           app.config['SECRET_KEY'])
+                           getenv('FG_SECRET_KEY'))
         return jsonify({'token': token.decode('UTF-8')})
 
     return make_response(jsonify({'message': 'Could not verify'}), 400)
