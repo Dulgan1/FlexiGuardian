@@ -34,7 +34,7 @@ def login():
         token = jwt.encode({'user_id': user_id,
                            'exp': datetime.datetime.now() +
                             datetime.timedelta(minutes=30)},
-                           getenv('FG_SECRET_KEY'))
+                           getenv('FG_SECRET_KEY'), 'HS256')
         return jsonify({'token': token})
 
     return make_response(jsonify({'message': 'Could not verify'}), 400)

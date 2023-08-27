@@ -13,11 +13,14 @@ def requires_token(f):
             user_name = session['user_name']
             return f(user_name, *args, **kwargs)
         token = None
-        if 'x-access-tokens' in request.headers:
-            token = request.headers['x-access-tokens'].split(" ")[1]
+        try:
+            if 'x-access-tokens' in request.headers:
+                token = request.headers['x-access-tokens']
+        except:
+            return jsonify({'message': 'Token required')
 
         try:
-            data = jwt.decode(token, getenv('FG_SECRET_KEY'))
+            data = jwt.decode(token, getenv('FG_SECRET_KEY'), algorithms=['HS256'])
             user = _session.query(User).filter(User.id==data['user_id']).first()
             user_name = user.user_name
         except:
