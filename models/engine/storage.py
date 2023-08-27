@@ -77,7 +77,7 @@ class Storage:
         for value in all_cls.values():
             if (value.id == id):
                 return value
-    def get_id(self, cls, data):
+    def get_obj(self, cls, data):
         """Gets object id by data of object, applies only User class for now"""
         if data and cls in classes.keys():
             clss = classes.get(cls)

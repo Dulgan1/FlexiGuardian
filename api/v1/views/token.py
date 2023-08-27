@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 from functools import wraps
 from flask import session, jsonify
+from api.v1.testapp import app
 import jwt
 from models import storage
 def requires_token(f):

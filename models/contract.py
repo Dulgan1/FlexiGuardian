@@ -12,6 +12,7 @@ class Contract(BaseModel, Base):
     buyer_id = Column('buyer', String(60), nullable=False)
     pro_ser_name = Column(String(128), nullable=False)
     desc = Column(JSON, nullable=False)
+    disputed = Column(Integer, default=0)
     status = Column(String(10), nullable=False)
     amount = Column(Float, nullable=False)
 
