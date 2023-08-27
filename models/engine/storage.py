@@ -81,7 +81,7 @@ class Storage:
         """Gets object id by data of object, applies only User class for now"""
         if data and cls in classes.keys():
             clss = classes.get(cls)
-            obj = self.__session.query(clss).filter_by(name=data).first()
+            obj = self.__session.query(User).filter_by(name=data).first()
             return obj
         return None
 
