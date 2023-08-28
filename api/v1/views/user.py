@@ -127,7 +127,6 @@ def guess_profile_view(user_name):
 
 @api_views.route('/users/<user_name>/profile',
                  methods=['GET', 'PUT'], strict_slashes=False)
-@requires_token
 def profile_ract(user_name):
     if request.method == 'GET':
         full_dict = _profile_view(user_name)

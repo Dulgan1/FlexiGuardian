@@ -12,7 +12,6 @@ def requires_token(f):
         if 'user_id' in session and 'user_name' in session:
             user_name = session['user_name']
             return f(user_name, *args, **kwargs)
-        token = None
         try:
             token = request.headers['x-access-tokens']
         except:
@@ -20,8 +19,8 @@ def requires_token(f):
 
         try:
             data = jwt.decode(token, getenv('FG_SECRET_KEY'), algorithms=['HS256'])
-            #user = _session.query(User).filter(User.id==data['user_id']).first()
-            #user_name = user.user_name
+            user = _session.query(User).filter(User.id==data['user_id']).first()
+            user_name = user.user_name
         except:
             return jsonify({'message':'token is invalid2222'})
         return f(user_name, *args, **kwargs)
