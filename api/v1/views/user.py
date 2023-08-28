@@ -6,6 +6,7 @@ from flask import abort, jsonify, make_response, request, session
 import jwt
 from models import storage
 from models.user import User, Review
+from models.business import Business
 from os import getenv
 import re
 from werkzeug.security import generate_password_hash, check_password_hash
