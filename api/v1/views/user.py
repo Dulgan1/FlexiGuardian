@@ -124,7 +124,7 @@ def _profile_view(user_name):
 def guess_profile_view(user_name):
     full_dict = _profile_view(user_name)
     status_code = full_dict.get('status', 501)
-    return make_response(jsonify(full_dict), status_code)
+    return make_response(jsonify({full_dict}), status_code)
 
 @api_views.route('/users/<user_name>/profile',
                  methods=['GET', 'PUT'], strict_slashes=False)
