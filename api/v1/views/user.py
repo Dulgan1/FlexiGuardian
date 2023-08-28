@@ -92,6 +92,7 @@ def register():
 def _profile_view(user_name):
     _session = storage.session()
     user = _session.query(User).filter(User.user_name==user_name).first()
+    full_dict = {}
     if not user:
         return {'message': 'User with username {} does not exist'.\
                 format(user_name), 'status': 400}
@@ -111,7 +112,7 @@ def _profile_view(user_name):
             review.update({'Review_By': by_username})
             review.pop('for_user_id')
             revs.append(review)
-    full_dict = user.to_dict()
+    full_dict.update(user.to_dict())
     full_dict.pop('password')
     if business:
         business = storage.get(Business, business.id)
