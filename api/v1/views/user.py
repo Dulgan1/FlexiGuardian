@@ -131,7 +131,8 @@ def guess_profile_view(user_name):
 def profile_ract(user_name):
     if request.method == 'GET':
         full_dict = _profile_view(user_name)
-
+        status_code = full_dict.get('status', 501)
+        return make_response(jsonify(full_dict), )
     if request.method == 'PUT':
         _session = storage.session()
         user = _session.query(User).filter(User.user_name==user_name).first()
