@@ -96,7 +96,9 @@ def _profile_view(user_name):
         return {'message': 'User with username {} does not exist'.\
                 format(user_name), 'status': 400}
     user_id = user.id
+    user = storage.get(User, user_id)
     business = _session.query(Business).filter(Business.user_id==user_id).first()
+    business = storage.get(Business, business.id)
     reviews = _session.query(Review).\
             filter(Review.for_user_id==user_id).order_by(Review.rating)
     revs = []
@@ -105,6 +107,7 @@ def _profile_view(user_name):
             by_user = review.by_user_id
             by_user = _session.query(User).filter(User.id==by_user).first()
             by_username = by_user.user_name
+            review = storage.get(Review, review.id)
             review = review.to_dict()
             review.update({'Review_By': by_username})
             review.pop('for_user_id')
