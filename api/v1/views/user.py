@@ -98,7 +98,6 @@ def _profile_view(user_name):
     user_id = user.id
     user = storage.get(User, user_id)
     business = _session.query(Business).filter(Business.user_id==user_id).first()
-    business = storage.get(Business, business.id)
     reviews = _session.query(Review).\
             filter(Review.for_user_id==user_id).order_by(Review.rating)
     revs = []
@@ -115,6 +114,7 @@ def _profile_view(user_name):
     full_dict = user.to_dict()
     full_dict.pop('password')
     if business:
+        business = storage.get(Business, business.id)
         business = business.to_dict()
         business.pop('id')
         business.pop('user_id')
