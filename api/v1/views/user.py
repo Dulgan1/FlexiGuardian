@@ -98,7 +98,7 @@ def _profile_view(user_name):
     user_id = user.id
     business = _session.query(Business).filter(Business.user_id==user_id).first()
     reviews = _session.query(Review).\
-            filter(Review.for_user_id==user_id).order_by(Reviews.rating)
+            filter(Review.for_user_id==user_id).order_by(Review.rating)
     revs = []
     if reviews:
         for review in reviews:
