@@ -125,6 +125,7 @@ def contract_create():
             abort(400, '{} required'.format(key))
     """if req['seller_id'] != session['user_id']:
         return jsonify({'message': 'unauthorized access'})"""
+    _seasion = storage.session()
     c_type = req['c_type']
     seller= req['s_user']
     buyer = req['b_user']
