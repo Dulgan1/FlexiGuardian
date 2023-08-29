@@ -133,7 +133,7 @@ def contract_create():
     amount = float(req['amount'])
 
     new_contract = Contract(c_type=c_type, seller_id=seller_id,
-                            buyer_id=buyer_id, name=name, desc=desc
+                            buyer_id=buyer_id, name=name, desc=desc,
                             status=status)
     storage.new(new_contract)
     storage.save()
