@@ -35,7 +35,7 @@ def rate_contract(contract_id):
     if user_id == contract.buyer_id:
         req = request.get_json()
         if 'rate' not in req.keys() and 'review' not in req.keys():
-            return make_response(jsonify({'error': 'Invalid data for rating'
+            return make_response(jsonify({'error': 'Invalid data for rating',
                                           'valid': 'rate, review'}), 400)
         rate = int(req.get('rate'))
         review = req.get('review')
