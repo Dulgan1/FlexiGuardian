@@ -12,7 +12,7 @@ class User(BaseModel, Base):
     user_name = Column(String(15), nullable=False, unique=True)
     email = Column(String(128), nullable=False, unique=True)
     phone = Column(String(15), nullable=False)
-    business = relationship('Business', backref='user', unique=True)
+    business = relationship('Business', backref='user')
     image_url = Column(String(500))
     password = Column(String(128), nullable=False)
     rating = Column(Float, default=0.0)
