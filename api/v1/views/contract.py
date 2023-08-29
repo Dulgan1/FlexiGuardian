@@ -116,12 +116,12 @@ def contract_create():
     if not request.get_json():
         abort(400, 'Not a JSON')
 
-    r_keys = ['c_type', 'seller_id',
-              'buyer_id', 'name',
+    r_keys = ['c_type', 's_user',
+              'b_user', 'name',
               'desc', 'amount']
     req = request.get_json()
     for key in r_keys:
-        if key not in req.keys():
+        if key not in req:
             abort(400, '{} required'.format(key))
     """if req['seller_id'] != session['user_id']:
         return jsonify({'message': 'unauthorized access'})"""
