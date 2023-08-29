@@ -100,6 +100,7 @@ def _profile_view(user_name):
     business = _session.query(Business).filter(Business.user_id==user_id).first()
     reviews = _session.query(Review).\
             filter(Review.for_user_id==user_id).order_by(Review.rating).all()
+    ignore = ['password', '__class__', 'id']
     revs = []
     if reviews:
         for review in reviews:
@@ -112,7 +113,9 @@ def _profile_view(user_name):
             review.pop('for_user_id')
             revs.append(review)
     full_dict.update(user.to_dict())
-    full_dict.pop('password')
+    for i in ignore:
+        full_dict.pop(i)
+
     if business:
         business = storage.get(Business, business.id)
         business = business.to_dict()
