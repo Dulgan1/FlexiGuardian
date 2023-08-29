@@ -132,13 +132,13 @@ def contract_create():
     seller_id = _session.query(User).filter(User.username==seller).first()
     buyer_id = _session.query(User).filter(User.username==buyer).first()
     name = req['name']
-    desc = req['desc']
+    descr = req['desc']
     status = 'created'
     amount = float(req['amount'])
 
     new_contract = Contract(c_type=c_type, seller_id=seller_id,
-                            buyer_id=buyer_id, name=name, description=desc,
-                            status=status)
+                            buyer_id=buyer_id, name=name, description=descr,
+                            status=status, amount=amount)
     storage.new(new_contract)
     storage.save()
     return make_response(jsonify({'messaege': 'Contract Created Successfully'}),
