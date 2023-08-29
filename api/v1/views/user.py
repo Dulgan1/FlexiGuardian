@@ -97,7 +97,6 @@ def _profile_view(user_name):
         return {'message': 'User with username {} does not exist'.\
                 format(user_name), 'status': 400}
     user_id = user.id
-    user = storage.get(User, user_id)
     business = _session.query(Business).filter(Business.user_id==user_id).first()
     reviews = _session.query(Review).\
             filter(Review.for_user_id==user_id).order_by(Review.rating).all()
@@ -128,7 +127,7 @@ def _profile_view(user_name):
 def guess_profile_view(user_name):
     full_dict = _profile_view(user_name)
     status_code = full_dict.get('status', 501)
-    return make_response(jsonify({full_dict}), status_code)
+    return make_response(jsonify(full_dict), status_code)
 
 @api_views.route('/users/<user_name>/profile',
                  methods=['GET', 'PUT'], strict_slashes=False)
