@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ Creates api test app """
 from api.v1.views import api_views
-from flask import Flask
+from flask import Flask, make_response
 from flask_cors import CORS
 from os import getenv
 from models import storage
