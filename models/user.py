@@ -9,10 +9,10 @@ class User(BaseModel, Base):
     """ User Class Defined """
     __tablename__ = 'users'
     name = Column(String(60), nullable=False)
-    user_name = Column(String(15), nullable=False)
-    email = Column(String(128), nullable=False)
+    user_name = Column(String(15), nullable=False, unique=True)
+    email = Column(String(128), nullable=False, unique=True)
     phone = Column(String(15), nullable=False)
-    business = relationship('Business', backref='user')
+    business = relationship('Business', backref='user', unique=True)
     image_url = Column(String(500))
     password = Column(String(128), nullable=False)
     rating = Column(Float, default=0.0)

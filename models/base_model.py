@@ -36,6 +36,8 @@ class BaseModel:
         temp['created_at'] = datetime.isoformat(temp['created_at'])
         temp['updated_at'] = datetime.isoformat(temp['updated_at'])
         temp['__class__'] = self.__class__.__name__
+        if '_sa_instance_state' in temp:
+            del temp['_sa_instance_state']
         return temp
 
     def save(self):
