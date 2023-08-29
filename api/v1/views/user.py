@@ -144,10 +144,11 @@ def profile_ract(user_name):
         user = _session.query(User).filter(User.user_name==user_name).first()
         if request.get_json():
             data = request.get_json()
-            ignore = ['password', 'user_name', 'email', 'created_at', 'id']
+            ignore = ['password', 'user_name', 'email', 'created_at', 'id', '__class__']
             for k, v in data.items():
                 if k not in ignore:
                     setattr(user, k, v)
+            user.updated_at = datetime.isoformat(datetime.now())
             storage.save()
             full_dict = _profile_view(user_name)
             status_code = full_dict.get('status', 501)
