@@ -148,7 +148,7 @@ def profile_ract(user_name):
             for k, v in data.items():
                 if k not in ignore:
                     setattr(user, k, v)
-            user.updated_at = datetime.datetime.isoformat(datetime.datetime.now())
+            user.save()
             storage.save()
             full_dict = _profile_view(user_name)
             status_code = full_dict.get('status', 501)
