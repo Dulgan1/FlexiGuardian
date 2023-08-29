@@ -100,7 +100,7 @@ def _profile_view(user_name):
     user = storage.get(User, user_id)
     business = _session.query(Business).filter(Business.user_id==user_id).first()
     reviews = _session.query(Review).\
-            filter(Review.for_user_id==user_id).order_by(Review.rating)
+            filter(Review.for_user_id==user_id).order_by(Review.rating).all()
     revs = []
     if reviews:
         for review in reviews:
