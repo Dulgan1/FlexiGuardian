@@ -1,4 +1,5 @@
 #!/usr/bin/python
+""" Handles Login, Register, profile interactions api"""
 from api.v1.views import api_views
 from api.v1.views.token import requires_token
 import datetime 

@@ -105,14 +105,14 @@ def contract_view(contract_id):
 @api_views.route('/contracts/create', methods=['POST'], strict_slashes=False)
 def contract_create():
     """User create Contract as Buyer"""
-    try:
+    """try:
         user_id = session['user_id']
     except:
         token = request.headers['x-access-tokens']
         data = jwt.decode(token, app.config['SECRET_KEY'])
         user_id = data['user_id']
     else:
-        make_response(jsonify({'message': 'Login required'}), 400)
+        make_response(jsonify({'message': 'Login required'}), 400)"""
     if not request.get_json():
         abort(400, 'Not a JSON')
 
@@ -123,17 +123,20 @@ def contract_create():
     for key in r_keys:
         if key not in req.keys():
             abort(400, '{} required'.format(key))
-
+    """if req['seller_id'] != session['user_id']:
+        return jsonify({'message': 'unauthorized access'})"""
     c_type = req['c_type']
-    seller_id = req['seller_id']
-    buyer_id = req['buyer_id']
+    seller= req['s_user']
+    buyer = req['b_user']
+    seller_id = _session.query(User).filter(User.username==seller).first()
+    buyer_id = _session.query(User).filter(User.username==buyer).first()
     name = req['name']
     desc = req['desc']
     status = 'created'
     amount = float(req['amount'])
 
     new_contract = Contract(c_type=c_type, seller_id=seller_id,
-                            buyer_id=buyer_id, name=name, desc=desc,
+                            buyer_id=buyer_id, name=name, description=desc,
                             status=status)
     storage.new(new_contract)
     storage.save()
@@ -148,9 +151,9 @@ def dispute_contract(contract_id):
     if not request.get_json():
         abort(400, 'Not a JSON')
 
-    try:                                                                                        user_id = session['user_id']                                                        except:
+    """try:                                                                                        user_id = session['user_id']                                                        except:
         token = request.headers['x-access-tokens']                                              data = jwt.decode(token, app.config['SECRET_KEY'])                                      user_id = data['user_id']                                                           else:
-        make_response(jsonify({'message': 'Login required'}), 400)
+        make_response(jsonify({'message': 'Login required'}), 400)"""
 
     contract = _session.query(Contract).\
             filter(Contract.id==contract_id).first()
