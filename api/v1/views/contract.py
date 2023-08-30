@@ -15,13 +15,18 @@ def calc_tot_rate(user_id):
     _session = storage.session()
     reviews = _session.query(Review).filter(Review.for_user_id==user_id).all()
     total = 0
-    count = 1
+    count = 0
     for review in reviews:
         total += int(review.rating)
         count += 1
-    rate_tot = total / count
+    try:
+        rate_tot = total / count
+    except:
+        user.rating = total
+        storage.save()
+        return
     user.rating = rate_tot
-    storage.save
+    storage.save()
 
 @api_views.route('/contracts/<contract_id>/rate',
            methods=['POST'], strict_slashes=False)
