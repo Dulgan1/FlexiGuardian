@@ -17,12 +17,12 @@ def calc_tot_rate(user_id):
     total = 0
     count = 1
     for review in reviews:
-        total += review.rating
+        total += int(review.rating)
         count += 1
     rate_tot = total / count
     user.rating = rate_tot
-    _session.add(user)
     storage.save
+
 @api_views.route('/contracts/<contract_id>/rate',
            methods=['POST'], strict_slashes=False)
 def rate_contract(contract_id):
