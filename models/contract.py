@@ -17,4 +17,4 @@ class Contract(BaseModel, Base):
     amount = Column(Float, nullable=False)
 
     def __init__(self, *args, **kwargs):
-        super.__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
