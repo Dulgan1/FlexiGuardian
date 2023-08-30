@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """Handles routes for contract"""
 from api.v1.views import api_views
-from api.v1 import calc_tot_rate
 from flask import abort, session, request, make_response, jsonify
 import jwt
 from models.contract import Contract
@@ -10,6 +9,19 @@ from models import storage
 
 from api.v1.views.token import requires_token
 
+def calc_tot_rate(user_id):
+    """Calculates and stores the rating avg of user"""
+    user = storage.get(User, user_id)
+    _session = storage.session()
+    reviews = _session.query(Review).filter(Review.for_user_id==user_id)
+    total = 0
+    count = 0
+    for review in reviews:
+        total += review.rating
+    count += 1
+    rate_tot = total / count
+    user.rating = rate_tot
+    storage.save
 @api_views.route('/contracts/<contract_id>/rate',
            methods=['POST'], strict_slashes=False)
 def rate_contract(contract_id):
