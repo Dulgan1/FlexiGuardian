@@ -32,4 +32,4 @@ class Review(BaseModel, Base):
 
     def __init__(self, *args, **kwargs):
         """Initializes Review class instance"""
-        super.__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
