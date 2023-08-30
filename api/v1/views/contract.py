@@ -13,7 +13,7 @@ def calc_tot_rate(user_id):
     """Calculates and stores the rating avg of user"""
     user = storage.get(User, user_id)
     _session = storage.session()
-    reviews = _session.query(Review).filter(Review.for_user_id==user_id).first()
+    reviews = _session.query(Review).filter(Review.for_user_id==user_id).all()
     total = 0
     count = 1
     for review in reviews:
