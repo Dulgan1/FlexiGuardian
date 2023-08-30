@@ -20,20 +20,20 @@ def rate_contract(contract_id):
 
     _session = storage.session()
 
-    try:
+    """try:
         user_id = session['user_id']
     except:
         token = request.headers['x-access-tokens']
         data = jwt.decode(token, app.config['SECRET_KEY'])
         user_id = data['user_id']
     else:
-        return make_response(jsonify({'message': 'Login required'}), 400)
+        return make_response(jsonify({'message': 'Login required'}), 400)"""
 
     contract = _session.query(Contract).\
             filter(Contract.id==contract_id).first()
     if not contract:
         abort(404, 'Contract Not Found')
-    if user_id == contract.buyer_id:
+    if request.get_json()['buyer_id'] == contract.buyer_id:
         req = request.get_json()
         if 'rate' not in req.keys() and 'review' not in req.keys():
             return make_response(jsonify({'error': 'Invalid data for rating',
