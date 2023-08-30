@@ -41,7 +41,8 @@ def rate_contract(contract_id):
         review = req.get('review')
         seller_id = contract.seller_id
 
-        new_review = Review(by_user_id=user_id, for_user_id=seller_id,
+        new_review = Review(by_user_id=request.get_json()['buyer_id'],
+                            for_user_id=seller_id,
                             review=review, rating=rate)
         storage.new(new_review)
         storage.save()
