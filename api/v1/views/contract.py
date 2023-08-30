@@ -130,8 +130,8 @@ def contract_create():
     c_type = req['c_type']
     seller= req['s_user']
     buyer = req['b_user']
-    seller_id = _session.query(User).filter(User.username==seller).first()
-    buyer_id = _session.query(User).filter(User.username==buyer).first()
+    seller_id = _session.query(User).filter(User.user_name==seller).first()
+    buyer_id = _session.query(User).filter(User.user_name==buyer).first()
     name = req['name']
     descr = req['desc']
     status = 'created'
