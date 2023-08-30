@@ -10,7 +10,7 @@ from models import storage
 
 from api.v1.views.token import requires_token
 
-@api_route('/contracts/<contract_id>/rate',
+@api_views.route('/contracts/<contract_id>/rate',
            methods=['POST'], strict_slashes=False)
 @requires_token
 def rate_contract(contract_id):
