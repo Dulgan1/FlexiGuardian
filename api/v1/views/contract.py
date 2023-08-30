@@ -43,7 +43,7 @@ def rate_contract(contract_id):
 
         new_review = Review(by_user_id=request.get_json()['buyer_id'],
                             for_user_id=seller_id,
-                            review=review, rating=rate)
+                            review_body=review, rating=rate)
         storage.new(new_review)
         storage.save()
         calc_tot_rate(seller_id)
