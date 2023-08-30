@@ -21,6 +21,7 @@ def calc_tot_rate(user_id):
         count += 1
     rate_tot = total / count
     user.rating = rate_tot
+    _session.add(user)
     storage.save
 @api_views.route('/contracts/<contract_id>/rate',
            methods=['POST'], strict_slashes=False)
