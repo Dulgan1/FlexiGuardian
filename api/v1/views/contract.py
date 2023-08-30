@@ -14,7 +14,7 @@ from api.v1.views.token import requires_token
            methods=['POST'], strict_slashes=False)
 def rate_contract(contract_id):
     """Rating and review of contract by Buyer"""
-    if not resquest.get_json():
+    if not request.get_json():
         abort(400, 'Not a JSON')
 
     _session = storage.session()
