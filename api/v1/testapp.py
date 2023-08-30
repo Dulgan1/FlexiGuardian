@@ -16,9 +16,9 @@ cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 def close_storage(error):
     storage.close()
 
-@app.errorhandler(404)
+"""@app.errorhandler(404)
 def not_found(error):
-    return make_response(jsonify({'error': 'Not Found'}), 404)
+    return make_response(jsonify({'error': 'Not Found'}), 404)"""
 
 if __name__ == '__main__':
     app.run(host='localhost', port='5000')
