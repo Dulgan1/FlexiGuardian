@@ -29,7 +29,7 @@ def rate_contract(contract_id):
         return make_response(jsonify({'message': 'Login required'}), 400)
 
     contract = _session.query(Contract).\
-            filter(Contract.id=contract_id).first()
+            filter(Contract.id==contract_id).first()
     if not contract:
         abort(404, 'Contract Not Found')
     if user_id == contract.buyer_id:
@@ -123,7 +123,7 @@ def contract_create():
     for key in r_keys:
         if key not in req:
             abort(400, '{} required'.format(key))
-    """if req['seller_id'] != session['user_id']:
+    """if req['b_user'] != session['user_name']:
         return jsonify({'message': 'unauthorized access'})"""
     _session = storage.session()
     c_type = req['c_type']
