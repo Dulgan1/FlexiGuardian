@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Handles routes for contract"""
-from api.v1.views import api_views, calc_tot_rate
+from api.v1.views import api_views
+from api.v1 import calc_tot_rate
 from flask import abort, session, request, make_response
 import jwt
 from models.contract import Contract
