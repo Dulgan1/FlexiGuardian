@@ -11,7 +11,7 @@ class Contract(BaseModel, Base):
     seller_id = Column(String(60), nullable=False)
     buyer_id = Column(String(60), nullable=False)
     name = Column(String(128), nullable=False)
-    description = Column(JSON, nullable=False)
+    description = Column(String(5000), nullable=False)
     disputed = Column(Integer, default=0)
     status = Column(String(10), nullable=False)
     amount = Column(Float, nullable=False)

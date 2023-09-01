@@ -98,7 +98,8 @@ def _profile_view(user_name):
         return {'message': 'User with username {} does not exist'.\
                 format(user_name), 'status': 400}
     user_id = user.id
-    business = _session.query(Business).filter(Business.user_id==user_id).first()
+    business = _session.query(Business).\
+            filter(Business.user_id==user_id).first()
     reviews = _session.query(Review).\
             filter(Review.for_user_id==user_id).order_by(Review.rating).all()
     ignore = ['password', '__class__', 'id']
@@ -157,3 +158,6 @@ def profile_ract(user_name):
         else:
             abort(400, 'Not a JSON')
     abort(501, 'Something went wrong or method not available')
+
+@api_views.route('/users/<user_id>/business')
+def business()

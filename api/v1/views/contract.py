@@ -71,13 +71,13 @@ def rate_contract(contract_id):
 @api_views.route('/contracts/<contract_id>/initiate',
                  methods=['POST'], strict_slashes=False)
 def initiate_con(contract_id):
-    """Initiate contract by Seller"""
+    """Initiate contract by Seller, request => {"status": "ongoing"}"""
     if not request.get_json():
         abort(400, 'Not a JSON')
     if 'status' not in request.get_json().keys():
         abort(400, 'Invalid data')
     _session = storage.session()
-    try:
+    """try:
         user_id = session['user_id']
     except:
         token = request.headers['x-access-tokens']
@@ -85,7 +85,7 @@ def initiate_con(contract_id):
         user_id = data['user_id']
     else:
         return make_response(jsonify({'message': 'Login required'}), 400)
-    contract = _session.query(Contract).filter(Contract.id==contract_id).first()
+    contract = _session.query(Contract).filter(Contract.id==contract_id).first()"""
     if not contract:
         abort(404, 'Contract Not Found')
     req = request.get_json()
@@ -194,3 +194,21 @@ def dispute_contract(contract_id):
         storage.save()
         return make_reponse(jsonify({'message': 'Dispute review sent successfully'}), 200)
     abort(500)
+
+@api_views.route('/<user_name>/contracts', methods=['GET'], strict_slashes=False)
+def get_contracts(user_name):
+    _session = storage.session()
+    user = _session.query(User).filter(User.user_name==user_name).first()
+    contracts_as_s = _session.query(Contract).filter(Contract.seller_id==user.id).all()
+    contracts_as_b = _session.query(Contract).filter(Contract.buyer_id==user.id).all()
+    as_s_list = []
+    as_b_list = []
+    for con in contracts_as_s:
+        con = con.to_dict()
+        as_s_list.append(con)
+    for con in contracts_as_b:
+        con = con.to_dict()
+        as_b_list.append(con)
+
+    all_dict = {'Contracts_buyer': as_b_list, 'Contract_seller': as_s_list}
+    return make_response(jsonify(all_dict), 200)
