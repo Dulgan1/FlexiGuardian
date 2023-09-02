@@ -19,7 +19,7 @@ def login():
         if 'email' not in request.form:
             error = 'email required'
             return render_template('login.html', error=error)
-        else 'password' not in request.form:
+        elif 'password' not in request.form:
             error = 'password required'
             return render_template('login.html', error=error)
 
