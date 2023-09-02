@@ -38,7 +38,7 @@ def register():
             return render_template('register.html', error=error)
         user_exists = _session.query(User).\
                 filter(User.user_name==user_name).first()
-        elif user_exists:
+        if user_exists:
             error = 'username is taken'
             return render_template('register.html', error=error)
         else:
