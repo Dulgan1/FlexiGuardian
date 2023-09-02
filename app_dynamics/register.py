@@ -33,7 +33,7 @@ def register():
         _session = storage.session()
         acct_exists = _session.query(User).\
                 filter(User.email==email).first()
-        elif acct_exists:
+        if acct_exists:
             error = 'user with email already exists'
             return render_template('register.html', error=error)
         user_exists = _session.query(User).\
