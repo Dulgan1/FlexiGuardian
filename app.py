@@ -7,7 +7,7 @@ from api.v1.views import api_views
 from app_dynamics import app_views
 from os import getenv
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder('/app_dynamics/templates'))
 app.register_blueprint(app_views)
 app.register_blueprint(api_views)
 app.config['SECRET_KEY'] = getenv('FG_SECRET_KEY')
