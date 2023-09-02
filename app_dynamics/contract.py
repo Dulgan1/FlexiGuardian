@@ -94,7 +94,7 @@ def contract_view(user_id, contract_id):
 @app_views.route('/contracts/create', methods=['GET', 'POST'], strict_slashes=False)
 @requires_token
 def contract_create(user_id):
-    if request.method == 'POST'
+    if request.method == 'POST':
         r_keys = ['c_type', 's_user',
                   'name', 'desc', 'amount']
 
