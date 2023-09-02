@@ -15,7 +15,7 @@ def home():
 
 @app_views.route('/login', methods=['GET', 'POST'], strict_slashes=False)
 def login():
-    if request.method == 'POST'
+    if request.method == 'POST':
         if 'email' not in request.form:
             error = 'email required'
             return render_template('login.html', error=error)
