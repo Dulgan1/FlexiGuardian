@@ -42,7 +42,7 @@ def register():
             error = 'username is taken'
             return render_template('register.html', error=error)
         else:
-            password = generate_password_hash(request.form['password'], method='scrypt')
+            password = generate_password_hash(request.form['password'], method='md5')
             new_user = User(name=name, email=email,
                             user_name=user_name,phone=phone,
                             password=password)
