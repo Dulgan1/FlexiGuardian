@@ -7,9 +7,9 @@ class Business(BaseModel, Base):
     user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
     name = Column(String(128), nullable=False)
     address = relationship('Address', backref='business')
-    contacts = Column(JSON)
+    contacts = Column(String(500))
     description = Column(String(5000), nullable=False)
-    image_url = Column(String(500), nullable=True)
+    image_url = Column(String(500))
 
     def __init__(self, *args, **kwargs):
         super().__init(*args,**kwargs)

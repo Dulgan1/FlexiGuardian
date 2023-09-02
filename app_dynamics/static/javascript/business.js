@@ -1,0 +1,2 @@
+//TODO: HANDLE WHAT HAPPENS IF THE USER GETTING DOES NOT OWN USERNAME,
+//CHECK in register.py, for reason and how.

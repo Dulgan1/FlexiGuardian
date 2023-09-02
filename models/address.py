@@ -4,7 +4,6 @@ from sqlalchemy.orm import relationship
 
 class Address(BaseModel, Base):
     __tablename__ = "addresses"
-    country = Column(String(30), nullable=False)
     state = Column(String(30), nullable=False) # state or region
     zipcode = Column(String(30), nullable=False)
     addr_line = Column(String(128), nullable=False)

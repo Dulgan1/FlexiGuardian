@@ -159,5 +159,21 @@ def profile_ract(user_name):
             abort(400, 'Not a JSON')
     abort(501, 'Something went wrong or method not available')
 
-@api_views.route('/users/<user_id>/business')
-def business()
+@api_views.route('/users/<user_name>/business', methods=['GET'], strict_slashes=False)
+def business(user_name):
+    try:
+        _session = storage.session()
+        user = _session.query(User).filter(User.user_name==user_name).first()
+        business = _session.query(Business).filter(Business.user_id==user.id).first()
+        address = _session.query(Address).filter(Address.business_id==business.id).first()
+        address = address.to_dict()
+        full_dict = business.to_dict()
+        ig_keys = ['id', 'user_id', '__class__', 'address']
+
+        for key in ig_keys:
+            full_dict.pop(key)
+        full_dict['address'] = address
+
+        return make_response(jsonify(full_dict), 200)
+    except:
+        abort(400)
