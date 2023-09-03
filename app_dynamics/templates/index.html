@@ -28,9 +28,9 @@
 	{% for user in users %}
         <div class="profile-card">
 	  {% if user.image_url %}
-            <img src="{{ url_for(user.image_urli) }}" alt="{{ user.full_name }}">
+            <img src="{{ url_for(user.image_url) }}" alt="{{ user.name }}">
 	    {% else %}
-	    <img src="" alt="{{ user.full_name }}">
+	    <img src="" alt="{{ user.name }}">
 	  {% endif %}
 	    <h3>{{ user.full_name }}</h3> <p><b><i>{{ user.user_name }}</i></b></p>
 	    <p>{{ user.business_name }}</p>
@@ -38,7 +38,7 @@
                 <span>Rating:</span>
 		<span>{{user.rating}}</span>
             </div>
-	    <button id="create-con">Request</button>
+	    <a href="{{ url_for('app_views.profile', user_name=username) }}"<button class="create-con">Request</button></a>
         </div>
 	{% endfor %}
     </div>
