@@ -30,7 +30,7 @@
 	  {% if user.image_url %}
             <img src="{{ url_for(user.image_urli) }}" alt="{{ user.full_name }}">
 	    {% else %}
-	    <img src="{{ url_for(user.image_urli) }}" alt="{{ user.full_name }}">
+	    <img src="{{ url_for(user.image_url) }}" alt="{{ user.full_name }}">
 	  {% endif %}
 	    <h3>{{ user.full_name }}</h3> <p><b><i>{{ user.user_name }}</i></b></p>
 	    <p>{{ user.business_name }}</p>
