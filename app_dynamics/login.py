@@ -16,13 +16,6 @@ def home():
 @app_views.route('/login', methods=['GET', 'POST'], strict_slashes=False)
 def login():
     if request.method == 'POST':
-        if 'email' not in request.form:
-            error = 'email required'
-            return render_template('login.html', error=error)
-        elif 'password' not in request.form:
-            error = 'password required'
-            return render_template('login.html', error=error)
-
         email = request.form['email']
         password = request.form['password']
         user = storage.get_user(email)
