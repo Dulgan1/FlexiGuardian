@@ -14,7 +14,7 @@ def register():
 
     if 'user_id' in session:
         flash('Already Registered and logged in')
-        return redirect(url_for('home'))
+        return redirect(url_for('app_views.home'))
 
     if request.method == 'POST':
         name = request.form['name']
@@ -52,7 +52,7 @@ def register():
             session['user_id'] = new_user.id
             session['user_name'] = new_user.user_name
             flash('Youe account is successfully registered')
-            return redirect(url_for('home'))
+            return redirect(url_for('app_views.home'))
     return render_template('register.html')
 
 @app_views.route('/users/<user_name>/business',
@@ -79,7 +79,7 @@ def register_business(user_id, user_name):
             storage.new(business)
             storage.save()
             flash('Business profile created successfully')
-            return redirect(url_for('/users/' + user_name))
+            return redirect(url_for('app_views.profile', user_name=user_name))
         else:
             whose = 'owner'
             return render_template('business.html', whose=whose)
@@ -89,7 +89,7 @@ def register_business(user_id, user_name):
             return render_template('business.html', whose=whose)
         else:
             flash('Can not create business profile for user')
-            return redirect(url_for('/'))
+            return redirect(url_for('app_views.home'))
 
 @app_views.route('/users/<user_name>', methods=['GET'], strict_slashes=False)
 def profile(user_name): #TODO: MAKE SURE TO COMPLETE user.js and dashboard.js

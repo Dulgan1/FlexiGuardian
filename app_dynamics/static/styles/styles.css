@@ -1,0 +1,107 @@
+/* Reset some default styles */
+body, h2, p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.profile-card {
+    margin: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: left;
+}
+
+.profile-card h3 {
+    color: #333;
+}
+
+.input-group {
+    margin: 20px 0;
+}
+                                                                                                     .input-group input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.error-message {
+    color: red;
+}
+
+.input-group input[type="submit"] {
+    background-color: #007f00;
+    color: #fff;
+    cursor: pointer;
+}
+/* Header styles */
+.header {
+    display: fixed;
+    background-color: #fff; /* Header background color */
+    color: #aaa; /* Header text color */
+    padding: 20px 0; /* Add padding to the top and bottom */
+    text-align: center; /* Center align the content */
+    position: relative; /* Position relative for absolute positioning of user avatar */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Logo styles */
+.logo-container {
+    margin: 0 auto; /* Center the logo */
+    max-width: 200px; /* Adjust the maximum logo width */
+}
+.logo {                                                                                                  display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Search input and button styles */
+.search-container {
+    margin-top: 20px; /* Add some spacing below the logo */
+    text-align: center; /* Center align the input and button */
+}
+#search {                                                                                                padding: 10px; /* Adjust padding for input */                                                        border: 1px solid #ccc; /* Input border */
+    border-radius: 5px; /* Rounded corners */
+}
+
+#search-button {
+    padding: 10px 20px; /* Adjust padding for button */
+    background-color: #007f00; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+}
+
+/* User avatar styles */
+.user-avatar {
+    position: absolute; /* Position absolute for alignment */
+    top: 20px; /* Adjust the top position */
+    right: 20px; /* Adjust the right position */
+}
+
+.user-avatar img {
+    max-width: 40px; /* Adjust the maximum width of the avatar */
+    height: auto;
+    border-radius: 50%; /* Make the avatar round */
+}
+
+#home-login {
+    padding: 0px 20px; /* Adjust padding for button */
+    background-color: #007f00; /* Button background color */                                color: #fff; /* Button text color */                                                    border: none; /* Remove button border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+}
