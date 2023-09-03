@@ -8,9 +8,12 @@ from models.user import User
 from werkzeug.security import check_password_hash
 """ Route Login """
 
+
 @app_views.route('/home', strict_slashes=False)
 @app_views.route('/')
 def home():
+    _session = storage.session()
+    users = _session.query(User).order_by(User.rating).all()
     if 'user_id' in session:
         return render_template('index2.html')
     return render_template('index.html')
