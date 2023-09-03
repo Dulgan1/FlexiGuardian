@@ -13,7 +13,7 @@ from werkzeug.security import check_password_hash
 @app_views.route('/')
 def home():
     _session = storage.session()
-    users = _session.query(User).order_by(User.rating).all()
+    users = _session.query(User).order_by(User.rating).desc().all()
     if 'user_id' in session:
         logged_user = _session.query(User).\
                 filter(User.id==session['user_id']).first()
