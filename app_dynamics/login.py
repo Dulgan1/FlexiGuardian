@@ -34,7 +34,7 @@ def login():
                 session['user_id'] = user_id
                 session['user_name'] = user.user_name
                 flash('Successfully logged in')
-                return redirect(url_for('home'))
+                return redirect(url_for('app_view.home'))
 
             error = 'Invalid email or password'
             return render_template('login.html', error=error)
