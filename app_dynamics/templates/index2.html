@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="", href="{{ url_for('app_views.style/styles.css')}}">
+</head>
+<body>
+  <div class="header">
+        <!-- Logo centered at the top -->
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo" class="logo">
+        </div>
+
+        <!-- Search input and button -->                                                        <div class="search-container">
+            <input type="text" id="search" placeholder="Search">
+            <button id="search-button">Search</button>
+        </div>                                                                          
+        <!-- User avatar aligned to the right -->
+        <div class="user-avatar">
+		<a href="{{ url_for('app_views./user/'+logged_user.user_name)}}"><img src="{{ logged_user.image_url }}" alt="User Avatar">
+        </div>
+    </div>
+    <div class="user-profiles">
+	{% for user in users %}
+        <div class="profile-card">
+            <img src="user.image_url" alt="{{ user.full_name }}">
+	    <h3>{{ user.full_name }}</h3> <p><b><i>{{ user.user_name }}</i></b></p>
+	    <p>{{ user.business_name }}</p>
+            <div class="rating">
+                <span>Rating:</span>
+                <span>user.rating</span>
+            </div>
+	    <button id="create-con">Request</button>
+        </div>
+	{% endfor %}
+    </div>
+</body>
+</html>

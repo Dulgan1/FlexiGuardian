@@ -15,8 +15,10 @@ def home():
     _session = storage.session()
     users = _session.query(User).order_by(User.rating).all()
     if 'user_id' in session:
-        return render_template('index2.html')
-    return render_template('index.html')
+        logged_user = _session.query(User).\
+                filter(User.id==session['user_id']).first()
+        return render_template('index2.html', users=users, logged_user=logged_user)
+    return render_template('index.html', users=users)
 
 
 @app_views.route('/login', methods=['GET', 'POST'], strict_slashes=False)
