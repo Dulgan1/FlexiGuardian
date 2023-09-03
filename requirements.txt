@@ -2,6 +2,5 @@ PyJWT
 werkzeug
 flask
 flask_cors
-os
 SQLAlchemy
 uuid
