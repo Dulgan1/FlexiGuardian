@@ -38,7 +38,7 @@
                 <span>Rating:</span>
 		<span>{{user.rating}}</span>
             </div>
-	    <a href="{{ url_for('app_views.profile', user_name=username) }}"<button class="create-con">Request</button></a>
+	    <a href="{{ url_for('app_views.profile', user_name=user.user_name) }}"><button class="create-con">Request</button></a>
         </div>
 	{% endfor %}
     </div>
