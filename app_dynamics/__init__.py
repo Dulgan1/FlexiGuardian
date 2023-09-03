@@ -1,6 +1,6 @@
 from flask import Blueprint
 
-app_views = Blueprint('app_view', __name__)
+app_views = Blueprint('app_views', __name__)
 
 from app_dynamics.login import *
 from app_dynamics.register import *
