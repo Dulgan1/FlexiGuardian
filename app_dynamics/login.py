@@ -1,6 +1,8 @@
 #!/usr/bin/python
 from app_dynamics import app_views
-from flask import session, flash, request, render_template
+from flask import (session, flash,
+                   request, render_template, 
+                   redirect, url_for)
 from models import storage
 from models.user import User
 from werkzeug.security import check_password_hash
