@@ -13,6 +13,7 @@ class User(BaseModel, Base):
     email = Column(String(128), nullable=False, unique=True)
     phone = Column(String(15), nullable=False)
     business = relationship('Business', backref='user')
+    business_name = Column(String(500))
     image_url = Column(String(500))
     password = Column(String(128), nullable=False)
     rating = Column(Float, default=0.0)

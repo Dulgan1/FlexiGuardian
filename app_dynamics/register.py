@@ -75,8 +75,10 @@ def register_business(user_id, user_name):
                                 contacts=contacts, description=description)
             address = Address(state=state, zipcode=zipcode, business_id=business.id,
                               addr_line=addr_line)
+            user_byun.business_name = business.name
             storage.new(business)
             storage.new(business)
+            user.save()
             storage.save()
             flash('Business profile created successfully')
             return redirect(url_for('app_views.profile', user_name=user_name))
