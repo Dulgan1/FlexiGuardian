@@ -64,8 +64,8 @@ def register():
             storage.save()
             session['user_id'] = new_user.id
             session['user_name'] = new_user.user_name
-            flash('Youe account is successfully registered')
-            return redirect(url_for('app_views.home'))
+            flash('Your account is successfully registered')
+            return redirect(url_for('home'))
     return render_template('register.html')
 
 @app_views.route('/users/<user_name>/business',
