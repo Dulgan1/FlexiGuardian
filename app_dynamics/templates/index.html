@@ -101,6 +101,11 @@ body {
     border-radius: 5px; /* Rounded corners */
     cursor: pointer;
 }
+#users-img-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
 #users-img {
     max-width: 40px;
     height: auto;
@@ -131,7 +136,9 @@ body {
 	{% for user in users %}
         <div class="profile-card">
 	  {% if user.image_url %}
-	  <img src="{{ user.image_url }}" alt="{{ user.name }}" class="users-img">
+	  <div class="users-img-container">
+	  	<img src="{{ user.image_url }}" alt="{{ user.name }}" class="users-img">
+	  </div>
 	    {% else %}
 	    <img src="" alt="{{ user.name }}">
 	  {% endif %}
