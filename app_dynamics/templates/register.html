@@ -1,263 +1,107 @@
-<body id="ivqj">
-  <section class="gjs-section" id="i9de">
-    <div class="gjs-container" id="ip77"><img id="irrf" src=""/>
-      <form method="get" id="ix51">
-        <div id="ibnj"><input type="text" id="i9jvk" placeholder="Full name" name="name" required/></div>
-        <div id="ifmci"><input type="email" id="iu80n" required name="email" placeholder="Email"/></div>
-        <div id="ipk1f"><input type="text" id="int0n" name="phone" placeholder="Phone" required/></div>
-        <div id="ix47n"><input type="password" id="i4nmt" name="password" placeholder="Password" required/></div>
-        <div id="imvss"><input type="password" name="Cpassword" placeholder="Comfirm password" required id="i96sc"/>
-        </div>
-        <div id="ir9gu"></div>
-        <div id="ip8sz"></div>
-        <div></div>
-        <div></div>
-        <div id="i58mo"><button type="button" id="ivmhw">Submit</button></div>
-      </form>
-    </div>
-  </section>
-  <div id="ikcc8">Insert your text here</div>
-</body>
-<style>
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+  <!--<link rel="stylesheet" href="styles.css">-->
+  <style>
+  /* Reset some default styles */
+body, h2, p {
     margin: 0;
-  }
+    padding: 0;
+}
 
-  .gjs-container {
-    width: 90%;
-    margin: 0 auto;
-    max-width: 1200px;
-  }
-
-  .gjs-section {
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fff;
     display: flex;
-    padding: 50px 0;
-  }
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
 
-  #i9de {
-    padding-top: 50px;
-    padding-right: 0px;
-    padding-bottom: 504px;
-    padding-left: 0px;
-  }
+.registration-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
 
-  #irrf {
-    color: black;
-    margin-left: 45%;
-    height: 80px;
-    width: 85px;
-    box-shadow: 0 0 13px -7px black;
-  }
+.registration-container h2 {
+    color: #333;
+}
 
-  #ix51 {
-    height: 34px;
-  }
+.input-group {
+    margin: 20px 0;
+}
 
-  #i9jvk {
-    margin-left: 40%;
-    margin-top: 9px;
-    margin-bottom: 10px;
-    width: 176px;
-    height: 34px;
-    border-top-left-radius: 14px;
-    border-top-right-radius: 14px;
-    border-bottom-right-radius: 14px;
-    border-bottom-left-radius: 14px;
-    box-shadow: 0 0 13px -7px black;
-    border-top-color: rgba(255, 255, 255, 1);
-    border-right-color: rgba(255, 255, 255, 1);
-    border-bottom-color: rgba(255, 255, 255, 1);
-    border-left-color: rgba(255, 255, 255, 1);
-    border-top-style: solid;
-    border-right-style: solid;
-    border-bottom-style: solid;
-    border-left-style: solid;
-  }
-
-  #iu80n {
-    margin-left: 40%;
-    margin-bottom: 10px;
-    height: 34px;
-    border-top-left-radius: 14px;
-    border-top-right-radius: 14px;
-    border-bottom-right-radius: 14px;
-    border-bottom-left-radius: 14px;
-    box-shadow: 0 0 13px -7px black;
-    border-top-color: rgba(255, 255, 255, 1);
-    border-right-color: rgba(255, 255, 255, 1);
-    border-bottom-color: rgba(255, 255, 255, 1);
-    border-left-color: rgba(255, 255, 255, 1);
-    border-top-style: solid;
-    border-right-style: solid;
-    border-bottom-style: solid;
-    border-left-style: solid;
-  }
-
-  #i4nmt {
-    margin-bottom: 10px;
-    height: 34px;
-    border-top-left-radius: 14px;
-    border-top-right-radius: 14px;
-    border-bottom-right-radius: 14px;
-    border-bottom-left-radius: 14px;
-    box-shadow: 0px 0px 13px -7px black;
-    border-top-color: rgba(255, 255, 255, 1);
-    border-right-color: rgba(255, 255, 255, 1);
-    border-bottom-color: rgba(255, 255, 255, 1);
-    border-left-color: rgba(255, 255, 255, 1);
-    margin-left: 40%;
-    border-top-style: solid;
-    border-right-style: solid;
-    border-bottom-style: solid;
-    border-left-style: solid;
-  }
-
-  #int0n {
-    margin-left: 40%;
-    margin-bottom: 10px;
-    height: 34px;
-    border-top-left-radius: 14px;
-    border-top-right-radius: 14px;
-    border-bottom-right-radius: 14px;
-    border-bottom-left-radius: 14px;
-    box-shadow: 0 0 13px -7px black;
-    border-top-color: rgba(255, 255, 255, 1);
-    border-right-color: rgba(255, 255, 255, 1);
-    border-bottom-color: rgba(255, 255, 255, 1);
-    border-left-color: rgba(255, 255, 255, 1);
-    border-top-style: solid;
-    border-right-style: solid;
-    border-bottom-style: solid;
-    border-left-style: solid;
-  }
-
-  #i96sc {
-    margin-left: 40%;
-    height: 34px;
-    border-top-left-radius: 14px;
-    border-top-right-radius: 14px;
-    border-bottom-right-radius: 14px;
-    border-bottom-left-radius: 14px;
-    box-shadow: 0px 0px 13px -7px currentColor;
-    border-top-color: rgba(255, 255, 255, 1);
-    border-right-color: rgba(255, 255, 255, 1);
-    border-bottom-color: rgba(255, 255, 255, 1);
-    border-left-color: rgba(255, 255, 255, 1);
-    border-top-style: solid;
-    border-right-style: solid;
-    border-bottom-style: solid;
-    border-left-style: solid;
-  }
-
-  #ivmhw {
-    margin-left: 46%;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    width: 78px;
-    height: 33px;
-    border-top-color: rgba(255, 241, 54, 1);
-    border-right-color: rgba(255, 241, 54, 1);
-    border-bottom-color: rgba(255, 241, 54, 1);
-    border-left-color: rgba(255, 241, 54, 1);
-    background-color: rgba(255, 241, 63, 1);
-    color: rgba(0, 0, 0, 1);
-  }
-
-  #ikcc8 {
+.input-group input {
+    width: 100%;
     padding: 10px;
-  }
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
 
-  @media (max-width: 768px) {
-    #i4nmt {
-      border-top-style: solid;
-      border-right-style: solid;
-      border-bottom-style: solid;
-      border-left-style: solid;
-      border-top-color: rgba(255, 255, 255, 1);
-      border-right-color: rgba(255, 255, 255, 1);
-      border-bottom-color: rgba(255, 255, 255, 1);
-      border-left-color: rgba(255, 255, 255, 1);
-    }
+.error-message {
+    color: red;
+}
 
-    #irrf {
-      margin-left: 50%;
-    }
+.input-group input[type="submit"] {
+    background-color: #007f00;
+    color: #fff;
+    cursor: pointer;
+}
+ 
+/* Existing CSS styles remain the same */
 
-    #i9jvk {
-      border-top-style: solid;
-      border-right-style: solid;
-      border-bottom-style: solid;
-      border-left-style: solid;
-      border-top-color: rgba(255, 255, 255, 1);
-      border-right-color: rgba(255, 255, 255, 1);
-      border-bottom-color: rgba(255, 255, 255, 1);
-      border-left-color: rgba(255, 255, 255, 1);
-    }
+.logo {
+    display: block;
+    margin: 0 auto 20px; /* Center the logo and add some space below */
+    max-width: 200px; /* Adjust the maximum width of the logo */
+}
 
-    #i9jvk {
-      border-top-color: rgba(255, 255, 255, 1);
-      border-right-color: rgba(255, 255, 255, 1);
-      border-bottom-color: rgba(255, 255, 255, 1);
-      border-left-color: rgba(255, 255, 255, 1);
-    }
+  </style>
+</head>
+<body>
+    <div class="registration-container">
+      <img src="https://i.ibb.co/d6xqVJ2/logo.png" alt="Logo" class="logo">
 
-    #int0n {
-      border-top-style: solid;
-      border-right-style: solid;
-      border-bottom-style: solid;
-      border-left-style: solid;
-      border-top-color: rgba(255, 255, 255, 1);
-      border-right-color: rgba(255, 255, 255, 1);
-      border-bottom-color: rgba(255, 255, 255, 1);
-      border-left-color: rgba(255, 255, 255, 1);
-    }
+        <h2>Register</h2>
+        <form id="registration-form">
+            <div class="input-group">
+                <input type="text" id="full-name" placeholder="Full Name" name="name"required>
+            </div>
+            <div class="input-group">
+                <input type="email" id="email" placeholder="Email" name="email" required>
+            </div>
+	    <div class="input-group">
+		<input type="text" id="user_name" placeholder="Username" name="user_name" required>
+	    </div>
+            <div class="input-group">
+                <input type="tel" id="phone" placeholder="Phone" name="phone" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Password" name="password" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="confirm-password" placeholder="Confirm Password" name="cpassword" required>
+		{% if error %}
+		<p id="register-error" class="error-message">{{ error }}</p>
+		{% endif %}
+            </div>
+            <div class="input-group">
+                <input type="submit" value="Register">
+            </div>
+        </form>
+    </div>
 
-    #i96sc {
-      border-top-style: solid;
-      border-right-style: solid;
-      border-bottom-style: solid;
-      border-left-style: solid;
-      border-top-color: rgba(255, 255, 255, 1);
-      border-right-color: rgba(255, 255, 255, 1);
-      border-bottom-color: rgba(255, 255, 255, 1);
-      border-left-color: rgba(255, 255, 255, 1);
-    }
+    <script>
+    </script>
+</body>
+</html>
 
-    #i9de {
-      margin-top: 0px;
-      margin-right: 0px;
-      margin-bottom: 0px;
-      margin-left: 0px;
-      padding-top: 50px;
-      padding-right: 0px;
-      padding-bottom: 504px;
-      padding-left: 0px;
-      font-family: Trebuchet MS, Helvetica, sans-serif;
-    }
-
-    #ivmhw {
-      margin-left: 49%;
-      font-family: Trebuchet MS, Helvetica, sans-serif;
-      background-color: rgba(255, 246, 49, 1);
-    }
-
-    #iu80n {
-      border-top-style: solid;
-      border-right-style: solid;
-      border-bottom-style: solid;
-      border-left-style: solid;
-      border-top-color: rgba(255, 255, 255, 1);
-      border-right-color: rgba(255, 255, 255, 1);
-      border-bottom-color: rgba(255, 255, 255, 1);
-      border-left-color: rgba(255, 255, 255, 1);
-    }
-  }
-</style>
