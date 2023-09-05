@@ -12,7 +12,14 @@ from flask import (redirect, url_for,
 @app_views.route('/register', methods=['POST', 'GET'], strict_slashes=False)
 def register():
     """ Handles new user registrations"""
-    image_urls = ["""RANDOM IMAGES"""]
+    image_urls = ['https://i.ibb.co/vdPfRhw/FB-IMG-16876279408284166.jpg',
+                  'https://i.ibb.co/khQzRqs/FB-IMG-16902292397886720.jpg',
+                  'https://i.ibb.co/y0qRgry/FB-IMG-16893686181680673.jpg',
+                  'https://i.ibb.co/ynCPC8x/J0c-JYQsuv-Ex-NOBs-A1v6t-1-m9c8x-2x.jpg',
+                  'https://i.ibb.co/n1nbF6R/D3-UTUc3f-Zw-GYN4-KW4-TG6-1-f2cbk.jpg',
+                  'https://i.ibb.co/GvZMVYm/1681229924028.jpg',
+                  'https://i.ibb.co/kHkJv2b/1681228415670.jpg',
+                  'https://i.ibb.co/XkGXtTp/1333154-600x600.jpg']
 
     if 'user_id' in session:
         flash('Already Registered and logged in')
