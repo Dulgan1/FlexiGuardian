@@ -19,7 +19,7 @@ def close_storage(error):
 
 @app.errorhandler(404)
 def error404():
-    return render_template('app_dynamics/templates/404.html')
+    return render_template('404.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='5000')
