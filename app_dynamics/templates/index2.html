@@ -4,13 +4,136 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
-    <link rel="", href="{{ url_for('app_views.style/styles.css')}}">
+    <link rel="stylesheet", href="{{ url_for('static', filename='styles/styles.css')}}">
+    <style>
+	/* Reset some default styles */
+body, h2, p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}                                                                                       
+.profile-card {                                                                             margin: 20px;
+    display: inline-block;
+    background-color: #fff;
+    padding: 20px;
+    width: 240px;
+    max-width: 240px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: left;                                                                   }                                                                                       
+.profile-card h3 {
+    color: #ddd;
+}
+
+.input-group {
+    margin: 20px 0;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;                                                                          margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.error-message {
+    color: red;
+}
+
+.input-group input[type="submit"] {
+    background-color: #007f00;
+    color: #fff;
+    cursor: pointer;
+}
+/* Header styles */
+.header {
+    display: fixed;
+    background-color: #fff; /* Header background color */
+    color: #aaa; /* Header text color */
+    padding: 20px 0; /* Add padding to the top and bottom */
+    text-align: center; /* Center align the content */
+    position: relative; /* Position relative for absolute positioning of user avatar */
+    border-radius: 10px;                                                                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}                                                                                       
+/* Logo styles */
+.logo-container {
+    margin: 0 auto; /* Center the logo */
+    max-width: 70px; /* Adjust the maximum logo width */
+}
+.logo {
+    display: block;
+    max-width: 70px;
+    height: auto;
+}
+
+/* Search input and button styles */
+.search-container {
+    margin-top: 20px; /* Add some spacing below the logo */
+    text-align: center; /* Center align the input and button */
+}
+#search {                                                                                                padding: 10px; /* Adjust padding for input */                                                        border: 1px solid #ccc; /* Input border */
+    border-radius: 5px; /* Rounded corners */                                           }
+
+#search-button {
+    padding: 10px 20px; /* Adjust padding for button */
+    background-color: #007f00; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+}
+
+/* User avatar styles */
+.user-avatar {
+    position: absolute; /* Position absolute for alignment */
+    top: 20px; /* Adjust the top position */
+    right: 20px; /* Adjust the right position */
+}
+.user-avatar img {
+    max-width: 40px; /* Adjust the maximum width of the avatar */
+    height: auto;
+    border-radius: 50%; /* Make the avatar round */
+}
+#home-login {
+    padding: 0px 20px; /* Adjust padding for button */
+    background-color: #007f00; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+}
+.users-img-container {
+    display: block;
+}
+.users-img {
+    max-width: 60px;
+    height: auto;
+    max-height: 60px;
+    border-radius: 50%;
+}
+.create-con {
+    padding: 10px 20px; /* Adjust padding for button */
+    background-color: #007f00; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+}
+    </style>
 </head>
 <body>
   <div class="header">
         <!-- Logo centered at the top -->
         <div class="logo-container">
-            <img src="logo.png" alt="Logo" class="logo">
+            <img src="https://i.ibb.co/d6xqVJ2/logo.png" alt="Logo" class="logo">
         </div>
 
         <!-- Search input and button -->                                                        <div class="search-container">
@@ -19,20 +142,28 @@
         </div>                                                                          
         <!-- User avatar aligned to the right -->
         <div class="user-avatar">
-		<a href="{{ url_for('app_views./user/'+logged_user.user_name)}}"><img src="{{ logged_user.image_url }}" alt="User Avatar">
+		<a href="{{ url_for('app_views.profile') }}">
+			<img src"{{ cur_user.image_url }}" alt="{{ cur_user.name}}"/>
+		</a>
         </div>
     </div>
     <div class="user-profiles">
 	{% for user in users %}
         <div class="profile-card">
-            <img src="user.image_url" alt="{{ user.full_name }}">
-	    <h3>{{ user.full_name }}</h3> <p><b><i>{{ user.user_name }}</i></b></p>
+	  {% if user.image_url %}
+	  <div class="users-img-container">
+	  	<img src="{{ user.image_url }}" alt="{{ user.name }}" class="users-img">
+	  </div>
+	    {% else %}
+	    <img src="" alt="{{ user.name }}">
+	  {% endif %}
+	    <h3>{{ user.name }}</h3> <p><b><i>@{{ user.user_name }}</i></b></p>
 	    <p>{{ user.business_name }}</p>
             <div class="rating">
                 <span>Rating:</span>
-                <span>user.rating</span>
+		<span>{{user.rating}}</span>
             </div>
-	    <button id="create-con">Request</button>
+	    <a href="{{ url_for('app_views.profile', user_name=user.user_name) }}"><button class="create-con">Request</button></a>
         </div>
 	{% endfor %}
     </div>
