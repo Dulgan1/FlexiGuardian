@@ -10,5 +10,5 @@ def requires_token(f):
             return f(user_id, *args, **kwargs)
         else:
             flash('Login required')
-            return redirect(url_for('login'))
+            return redirect(url_for('app_views.login'))
     return decorator
