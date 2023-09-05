@@ -142,8 +142,8 @@ body {
         </div>                                                                          
         <!-- User avatar aligned to the right -->
         <div class="user-avatar">
-		<a href="{{ url_for('app_views.profile') }}">
-			<img src"{{ cur_user.image_url }}" alt="{{ cur_user.name}}"/>
+		<a href="{{ url_for('app_views.profile', user_name=logged_user.user_name) }}">
+			<img src"{{ logged_user.image_url }}" alt="{{ logged_user.name}}"/>
 		</a>
         </div>
     </div>
