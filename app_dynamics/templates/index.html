@@ -125,7 +125,7 @@ body {
 	{% for user in users %}
         <div class="profile-card">
 	  {% if user.image_url %}
-            <img src="{{ url_for(user.image_url) }}" alt="{{ user.name }}">
+	  <img src="{{ user.image_url }}" alt="{{ user.name }}">
 	    {% else %}
 	    <img src="" alt="{{ user.name }}">
 	  {% endif %}
