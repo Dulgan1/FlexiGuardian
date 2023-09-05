@@ -98,7 +98,9 @@ body {
     max-width: 40px; /* Adjust the maximum width of the avatar */
     height: auto;
     border-radius: 50%; /* Make the avatar round */
-}                                                                                                                                                                               #home-login {                                                                               padding: 0px 20px; /* Adjust padding for button */
+}
+#home-login {
+    padding: 0px 20px; /* Adjust padding for button */
     background-color: #007f00; /* Button background color */
     color: #fff; /* Button text color */
     border: none; /* Remove button border */
@@ -147,7 +149,7 @@ body {
 	    {% else %}
 	    <img src="" alt="{{ user.name }}">
 	  {% endif %}
-	    <h3>{{ user.full_name }}</h3> <p><b><i>{{ user.user_name }}</i></b></p>
+	    <h3>{{ user.name }}</h3> <p><b><i>{{ user.user_name }}</i></b></p>
 	    <p>{{ user.business_name }}</p>
             <div class="rating">
                 <span>Rating:</span>
