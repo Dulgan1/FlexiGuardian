@@ -3,6 +3,7 @@ from app_dynamics.auth import requires_token
 from models import storage
 from models.user import User
 import re
+import random
 from werkzeug.security import generate_password_hash
 from flask import (redirect, url_for,
                    session, flash,
@@ -11,6 +12,7 @@ from flask import (redirect, url_for,
 @app_views.route('/register', methods=['POST', 'GET'], strict_slashes=False)
 def register():
     """ Handles new user registrations"""
+    image_urls = ["""RANDOM IMAGES"""]
 
     if 'user_id' in session:
         flash('Already Registered and logged in')
@@ -19,7 +21,7 @@ def register():
     if request.method == 'POST':
         name = request.form['name']
         email = request.form['email']
-        user_name = request.form['user_name']
+        user_name = request.form['user_name'].replace(" ", "")
         phone = request.form['phone']
 
         if not re.match(r'[^@]+@[^@]+\.[^@]+', email):
@@ -42,10 +44,14 @@ def register():
             error = 'username is taken'
             return render_template('register.html', error=error)
         else:
-            password = generate_password_hash(request.form['password'], method='md5')
+            if request.form['password'] == request.form['cpassword']:
+                password = generate_password_hash(request.form['password'], method='md5')
+            else:
+                error = 'password not matched'
+                return render_template('register.html', error=error)
             new_user = User(name=name, email=email,
                             user_name=user_name,phone=phone,
-                            password=password)
+                            password=password, image_url=random.choice(image_urls))
 
             storage.new(new_user)
             storage.save()
