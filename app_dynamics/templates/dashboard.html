@@ -234,7 +234,6 @@ body {
 
         <!-- Search input and button -->                                                        <div class="search-container">
 		<h1>{{ user_name }}</h1>
-            <button id="search-button">Search</button>
         </div>                                                                          
         <!-- User avatar aligned to the right -->
         <div class="user-avatar">
@@ -254,25 +253,25 @@ body {
 		    {% if logged_user.business_name %} 
 		    <h3>{{ logged_user.business_name }}</h3><br/> 
 		    <p>{{ business.description }}</p><br/><br/><br/>
-		    <h3> {{ business.contacts }}</h3>
+		    <h3> {{ business.contacts }}</h3><br/><br/>
 
 		    {% else %}
-		    	<a href="{{ url_for('app_views.register_business', user_name=logged_user.user_name )}}">
+		    <br/><br/><a href="{{ url_for('app_views.register_business', user_name=logged_user.user_name )}}">
 				<button class="create-con">Create Business</button>
 			</a>
 		    {% endif %}
 		    </p>
                 <div class="dashboard-stats">
                     <div class="stat">
-                        <span class="stat-label">Created</span>
+			    <span class="stat-label">Created</span><br/>
 			<span class="stat-value">{{ logged_user.created_at }}</span>
                     </div>
                     <div class="stat">
                         <span class="stat-label">Rating</span>
-			<span class="stat-value">{{ logged_user.rating }}</span>
+			<span class="stat-value">{{ logged_user.rating }} <p style"color:yellow;">&star;</p></span>
                     </div>
                     <div class="stat">
-                        <span class="stat-label">Updated</span>
+			    <span class="stat-label">Updated</span><br/>
 			<span class="stat-value">{{ logged_user.updated_at }}</span>
                     </div>
                 </div>
