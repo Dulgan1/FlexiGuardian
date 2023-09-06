@@ -47,8 +47,10 @@ def login():
     return render_template('login.html')
 
 @app_views.route('/logout', methods=['GET'], strict_slashes=False)
-@requires_token
 def logout():
-    session.pop('user_id')
-    session.pop('user_name')
-    return redirect(url_for('app_views.home'))
+    try:
+        session.pop('user_id')
+        session.pop('user_name')
+    except:
+        return redirect(url_for('app_views.home'))
+    return redirect(url_for('app_views.login'))
