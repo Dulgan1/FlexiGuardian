@@ -219,8 +219,8 @@ body {
             <div class="dashboard-info">
 		    <h2 class="profile-name">{{ logged_user.name }}</h2>
 		    <p class="dashboard-description">
-		    {% if user.business_name %} 
-		    <h3>{{ user.business_name }}</h3><br/> 
+		    {% if logged_user.business_name %} 
+		    <h3>{{ logged_user.business_name }}</h3><br/> 
 		    <p>{{ business.description }}</p><br/><br/><br/>
 		    <h3> {{ business.contacts }}</h3>
 
