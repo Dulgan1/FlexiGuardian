@@ -88,6 +88,11 @@ body {
             <div class="input-group">
                 <input type="submit" value="Login">
             </div>
+	    <div class="input-group">
+		<a href="{{ url_for('app_views.register') }}">Sign Up</a>
+		<p> | </p>
+		<a href="{{ url_for('app_views.home') }}">HOME</a>
+	    </div>
         </form>
     </div>
 

@@ -143,7 +143,7 @@ body {
         <!-- User avatar aligned to the right -->
         <div class="user-avatar">
 		<button action="{{ url_for('app_views.profile', user_name=logged_user.user_name) }}", method="GET">
-			<img src"{{ logged_user.image_url }}" alt="{{ logged_user.name}}"/>
+			<img src"{{ logged_user.image_url }}" alt="{{ logged_user.name}}"/><h2>Dashboard</h2>
 		</button>
         </div>
     </div>
