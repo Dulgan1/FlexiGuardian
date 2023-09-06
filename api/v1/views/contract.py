@@ -216,7 +216,9 @@ def get_contracts(user_name):
         con = con.to_dict()
         user_as_b = _session.query(User).filter(User.id==con['buyer_id']).first()
         user_as_s = _session.query(User).filter(User.id==con['seller_id']).first()
-        user_as_s = user_as_s.user_name                                                         user_as_b = user_as_b.user_name                                                         con['user_as_b'] = user_as_b
+        user_as_s = user_as_s.user_name
+        user_as_b = user_as_b.user_name
+        con['user_as_b'] = user_as_b
         con['user_as_s'] = user_as_s
         as_b_list.append(con)
 
