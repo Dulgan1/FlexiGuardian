@@ -131,8 +131,8 @@ body {
 /* PROFILE CARD */
 /* Profile card container styles */
 .dashboard-card-container {
-    max-width: 320px; /* Adjust the maximum width as needed */
-    margin: 0 auto; /* Center the card horizontally */
+    max-width: 540px; /* Adjust the maximum width as needed */
+    margin: 0 10px; /* Center the card horizontally */
     padding: 20px; /* Add padding around the card */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a shadow to the card */
     text-align: center; /* Center-align the content */
@@ -284,11 +284,12 @@ body {
         <table class="user-table">
             <thead>
                 <tr>
-                    <th>User ID</th>
-                    <th>Full Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Rating</th>
+                    <th>Contract ID</th>
+		    <th>Name</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Role</th>
+		    <th>Seller</th>
                 </tr>
             </thead>
             <tbody>
@@ -299,6 +300,7 @@ body {
                     <td>{{ user.email }}</td>
                     <td>{{ user.phone }}</td>
                     <td>{{ user.rating }}</td>
+		    <td>{{ }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
