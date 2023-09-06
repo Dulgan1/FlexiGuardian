@@ -4,6 +4,7 @@ from models import storage
 from models.user import User
 import re
 import random
+import uuid
 from werkzeug.security import generate_password_hash
 from flask import (redirect, url_for,
                    session, flash,
@@ -110,8 +111,11 @@ def register_business(user_id, user_name):
 def profile(user_name): #TODO: MAKE SURE TO COMPLETE user.js and dashboard.js
     _session = storage.session()
     user = _session.query(User).filter(User.user_name==user_name).first()
-
+    business = _session.query(Business).filter(Business.user_id==user.id).first()
     if 'user_id' in session:
         if session['user_id'] == user.id:
-            return render_template('dashboard.html', user_name=user_name)
-    return render_template('user.html', user_name=user_name)
+            return render_template('dashboard.html', user_name=user_name,
+                                   logged_user=user, business=business,
+                                   cache_id=uuid.uuid4)
+    return render_template('user.html', user_name=user_name,
+                           business=business, user=user, cache_id=uuid.uuid4)
