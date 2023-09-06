@@ -233,7 +233,7 @@ body {
         </div>
 
         <!-- Search input and button -->                                                        <div class="search-container">
-		<h1>{{ user_name }}</h1>
+		<h1 id="top-username">{{ user_name }}</h1>
         </div>                                                                          
         <!-- User avatar aligned to the right -->
         <div class="user-avatar">
@@ -279,7 +279,7 @@ body {
             </div>
         </div>
     </div>
-    <h1 class="table-heading">Contracts</h1>
+    <h1 class="table-heading">Contracts as Seller</h1>
     <div class="table-container">
         <table class="user-table">
             <thead>
@@ -288,21 +288,30 @@ body {
 		    <th>Name</th>
                     <th>Description</th>
                     <th>Amount</th>
-                    <th>Role</th>
+                    <th>Buyer</th>
 		    <th>Seller</th>
+		    <th>Created On<th>
+		    <th>Status</th>
                 </tr>
             </thead>
-            <tbody>
-                {% for user in users %}
+            <tbody id="seller">
+            </tbody>
+        </table>
+    </div>
+    <h1 class="table-heading">Contracts as Buyer</h1>
+    <div class="table-container">
+        <table class="user-table">
+            <thead>
                 <tr>
-                    <td>{{ user.user_id }}</td>
-                    <td>{{ user.full_name }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.phone }}</td>
-                    <td>{{ user.rating }}</td>
-		    <td></td>
+                    <th>Contract ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Amount</th>                                                                         <th>Buyer</th>
+                    <th>Seller</th>                                                                         <th>Created On<th>
+                    <th>Status</th>
                 </tr>
-                {% endfor %}
+            </thead>
+            <tbody id="buyer">
             </tbody>
         </table>
     </div>
