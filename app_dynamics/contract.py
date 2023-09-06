@@ -56,7 +56,7 @@ def rate_contract(user_id, contract_id):
             calc_tot_rate(seller_id)
             flash('Review submitted successfully')
             return redirect(url_for('contracts'))
-        error = 'Error updating data'
+        error = 'Can not update data, not a participant'
         return render_template('dashboard.html', error=error)
     return render_template('contractrate.html')
 
@@ -90,7 +90,7 @@ def contract_view(user_id, contract_id):
                                contract_type=contract.c_type)
     else:
         flash('Unaccessible Contract')
-        return redirect(url_for('home'))
+        return redirect(url_for('app_views.home'))
 @app_views.route('/contracts/create', methods=['GET', 'POST'], strict_slashes=False)
 @requires_token
 def contract_create(user_id):
