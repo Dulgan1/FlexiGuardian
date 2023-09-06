@@ -1,5 +1,6 @@
 #!/usr/bin/python
 from app_dynamics import app_views
+from app_dynamics.auth import requires_token
 from flask import (session, flash,
                    request, render_template, 
                    redirect, url_for)
@@ -44,3 +45,10 @@ def login():
             error = 'Invalid email or password'
             return render_template('login.html', error=error)
     return render_template('login.html')
+
+@app_views.route('/logout', method=['GET'], strict_slashes=False)
+@requires_token
+def logout():
+    session.pop('user_id')
+    session.pop('user_name')
+    return redirect(url_for('app_views.home'))
