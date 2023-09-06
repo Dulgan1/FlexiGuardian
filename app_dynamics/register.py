@@ -76,9 +76,14 @@ def register():
 def register_business(user_id, user_name):
     _session = storage.session()
     user_byun = _session.query(User).filter(User.user_name==user_name).first()
+    user_byid = _session.query(User).filter(User.id==user_id).first()
 
     if user_id == user_byun.id:
         if request.method == 'POST':
+            if user_byid.business_name:
+                flash('Can not register another Business')
+                return redirect(url_for('app_views.profile'),
+                                user_name=user_name)
             name = request.form['name']
             contacts = request.form['contacts']
             description = request.form['description']
@@ -98,18 +103,9 @@ def register_business(user_id, user_name):
             flash('Business profile created successfully')
             return redirect(url_for('app_views.profile', user_name=user_name))
         else:
-            whose = 'owner'
-            return render_template('business.html', whose=whose)
-    else:
-        if request.method == 'GET':
-            whose = 'not owner'
-            return render_template('business.html', whose=whose)
-        else:
-            flash('Can not create business profile for user')
-            return redirect(url_for('app_views.home'))
-
+            return render_template('business.html', user=user_byid)
 @app_views.route('/users/<user_name>', methods=['GET'], strict_slashes=False)
-def profile(user_name): #TODO: MAKE SURE TO COMPLETE user.js and dashboard.js
+def profile(user_name):
     _session = storage.session()
     user = _session.query(User).filter(User.user_name==user_name).first()
     business = _session.query(Business).filter(Business.user_id==user.id).first()
