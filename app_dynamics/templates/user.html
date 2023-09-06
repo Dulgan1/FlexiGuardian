@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ user_name }}</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../static/javascripts/user.js?{{ cache_id }}"></script>
+    <style>
+	/* Reset some default styles */
+body, h2, p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Global styles */
+body {
+    font-family: Trebuchet MS, Helvetica, sans-serif;
+    background-color: #fff;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}                                                                                       
+.profile-card {                                                                             margin: 20px;
+    display: inline-block;
+    background-color: #fff;
+    padding: 20px;
+    width: 240px;
+    max-width: 240px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: left;                                                                   }                                                                                       
+.profile-card h3 {
+    color: #ddd;
+}
+
+.input-group {
+    margin: 20px 0;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;                                                                          margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.error-message {
+    color: red;
+}
+
+.input-group input[type="submit"] {
+    background-color: #007f00;
+    color: #fff;
+    cursor: pointer;
+}
+/* Header styles */
+.header {
+    display: fixed;
+    background-color: #fff; /* Header background color */
+    color: #aaa; /* Header text color */
+    padding: 20px 0; /* Add padding to the top and bottom */
+    text-align: center; /* Center align the content */
+    position: relative; /* Position relative for absolute positioning of user avatar */
+    border-radius: 10px;                                                                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}                                                                                       
+/* Logo styles */
+.logo-container {
+    margin: 0 auto; /* Center the logo */
+    max-width: 70px; /* Adjust the maximum logo width */
+}
+.logo {
+    display: block;
+    max-width: 70px;
+    height: auto;
+}
+
+/* Search input and button styles */
+.search-container {
+    margin-top: 20px; /* Add some spacing below the logo */
+    text-align: center; /* Center align the input and button */
+}
+#search {                                                                                                padding: 10px; /* Adjust padding for input */                                                        border: 1px solid #ccc; /* Input border */
+    border-radius: 5px; /* Rounded corners */                                           }
+
+#search-button {
+    padding: 10px 20px; /* Adjust padding for button */
+    background-color: #007f00; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+}
+
+/* User avatar styles */
+.user-avatar {
+    position: absolute; /* Position absolute for alignment */
+    top: 20px; /* Adjust the top position */
+    right: 20px; /* Adjust the right position */
+}
+.user-avatar img {
+    max-width: 40px; /* Adjust the maximum width of the avatar */
+    height: auto;
+    border-radius: 50%; /* Make the avatar round */
+}
+#home-login {
+    padding: 0px 20px; /* Adjust padding for button */
+    background-color: #007f00; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+}
+.users-img-container {
+    display: block;
+}
+.users-img {
+    max-width: 60px;
+    height: auto;
+    max-height: 60px;
+    border-radius: 50%;
+}
+.create-con {
+    padding: 10px 20px; /* Adjust padding for button */
+    background-color: #007f00; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+}
+/* PROFILE CARD */
+/* Profile card container styles */
+.dashboard-card-container {
+    max-width: 540px; /* Adjust the maximum width as needed */
+    margin: 20px auto; /* Center the card horizontally */
+    padding: 20px; /* Add padding around the card */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a shadow to the card */
+    text-align: center; /* Center-align the content */
+}
+
+/* Profile card styles */
+.dashboard-card {
+    background-color: #fff; /* Card background color */
+    border-radius: 10px; /* Rounded corners for the card */
+    overflow: hidden; /* Hide any content that overflows the card */
+}
+
+/* Profile avatar styles */
+.dashboard-avatar img {
+    max-width: 60%; /* Make the avatar image responsive */
+    border-radius: 50%; /* Make the avatar round */
+}
+
+/* Profile info styles */
+.dashboard-info {
+    padding: 20px; /* Add padding around the info */
+}
+
+/* Profile name styles */
+.dashboard-name {
+    font-size: 24px; /* Adjust the font size for the name */
+    margin-bottom: 10px; /* Add spacing below the name */
+}
+
+/* Profile description styles */
+.dashboard-description {
+    font-size: 16px; /* Adjust the font size for the description */
+    color: #555; /* Description text color */
+    margin-bottom: 20px; /* Add spacing below the description */
+}
+
+/* Profile stats styles */
+.dashboard-stats {
+    display: flex; /* Display statistics in a row */
+    justify-content: space-around; /* Distribute stats evenly */
+}
+
+/* Stat styles */
+.stat {
+    text-align: center; /* Center-align each stat */
+}
+
+/* Stat label styles */
+.stat-label {
+    font-weight: bold; /* Make the label bold */
+}
+
+/* Stat value styles */
+.stat-value {
+    font-size: 18px; /* Adjust the font size for the value */
+    color: #007f00; /* Stat value color */
+}
+
+/* Table style */
+.table-heading {
+    text-align: center; /* Center align the table heading */
+    color: #007f00; /* Text color for the heading */
+}
+
+/* Table container styles */
+.table-container {
+    max-width: 800px; /* Adjust the maximum width of the table container */
+    margin: 0 auto; /* Center the table horizontally */
+    padding: 20px; /* Add padding around the table */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a shadow to the table container */
+}
+
+/* User data table styles */
+.user-table {
+    width: 100%; /* Make the table fill its container */
+    border-collapse: collapse; /* Collapse borders for a cleaner look */
+}
+
+.user-table th, .user-table td {
+    padding: 10px; /* Adjust cell padding */
+    text-align: left; /* Align cell content to the left */
+    border-bottom: 1px solid #ccc; /* Add a border to table rows */
+}
+
+.user-table th {
+    background-color: #007f00; /* Header background color */
+    color: #fff; /* Header text color */
+}
+
+
+    </style>
+</head>
+<body>
+  <div class="header">
+        <!-- Logo centered at the top -->
+        <div class="logo-container">
+            <img src="https://i.ibb.co/d6xqVJ2/logo.png" alt="Logo" class="logo">
+        </div>
+
+        <!-- Search input and button -->                                                        <div class="search-container">
+		<h1>{{ user_name }}</h1>
+        </div>                                                                          
+        <!-- User avatar aligned to the right -->
+        <div class="user-avatar">
+		<a href="{{ url_for('app_views.logout') }}">
+			<button id="home-login">Logout</button>
+		</a>
+        </div>
+    </div>
+    <div class="dashboard-card-container">
+        <div class="dashboard-card">
+            <div class="dashboard-avatar">
+		    <img src="{{ user.image_url }}" alt="{{ user.name }}">
+            </div>
+            <div class="dashboard-info">
+		    <h2 class="profile-name">{{ user.name }}</h2>
+		    <p class="dashboard-description">
+		    {% if user.business_name %} 
+		    <h3>{{ user.business_name }}</h3><br/> 
+		    <p>{{ business.description }}</p><br/><br/><br/>
+		    <h3> {{ business.contacts }}</h3><br/><br/>
+
+		    {% else %}
+		    <br/><br/><h4 style="color: red;">* This user has no registered business</h4>
+		    {% endif %}
+		    </p>
+                <div class="dashboard-stats">
+                    <div class="stat">
+			    <span class="stat-label">Created</span><br/>
+			<span class="stat-value">{{ user.created_at }}</span>
+                    </div>
+                    <div class="stat">
+			    <span class="stat-label">Rating</span><br/>
+			<span class="stat-value">{{ user.rating }}</span>
+			<p style"color:yellow;">&starf;</p>
+                    </div>
+                    <div class="stat">
+			    <span class="stat-label">Updated</span><br/>
+			<span class="stat-value">{{ user.updated_at }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h1 class="table-heading">Reviews</h1>
+    <div class="table-container">
+    </div>
+</body>
+</html>
