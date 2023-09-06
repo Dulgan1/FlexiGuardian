@@ -265,7 +265,7 @@ body {
                 <div class="dashboard-stats">
                     <div class="stat">
                         <span class="stat-label">Created</span>
-			<span class="stat-value">{{ logged_user.created_at.split(" ")[0] }}</span>
+			<span class="stat-value">{{ str(logged_user.created_at).split(" ")[0] }}</span>
                     </div>
                     <div class="stat">
                         <span class="stat-label">Rating</span>
@@ -273,7 +273,7 @@ body {
                     </div>
                     <div class="stat">
                         <span class="stat-label">Updated</span>
-			<span class="stat-value">{{ logged_user.updated_at.split(" ")[0] }}</span>
+			<span class="stat-value">{{ str(logged_user.updated_at).split(" ")[0] }}</span>
                     </div>
                 </div>
             </div>
