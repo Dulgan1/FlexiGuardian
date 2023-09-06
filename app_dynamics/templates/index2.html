@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>{{ logged_user.name }}</title>
     <link rel="stylesheet", href="{{ url_for('static', filename='styles/styles.css')}}">
     <style>
 	/* Reset some default styles */
@@ -142,9 +142,9 @@ body {
         </div>                                                                          
         <!-- User avatar aligned to the right -->
         <div class="user-avatar">
-		<a href="{{ url_for('app_views.profile', user_name=logged_user.user_name) }}">
+		<button action="{{ url_for('app_views.profile', user_name=logged_user.user_name) }}", method="GET">
 			<img src"{{ logged_user.image_url }}" alt="{{ logged_user.name}}"/>
-		</a>
+		</button>
         </div>
     </div>
     <div class="user-profiles">
