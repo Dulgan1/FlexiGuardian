@@ -7,7 +7,7 @@ from sqlalchemy.orm import relationship
 
 class Contract(BaseModel, Base):
     __tablename__ = "contracts"
-    c_type = Column(Integer, nullable=False) # 1 product, 0 service
+    c_type = Column(String(10), nullable=False) # 1 product, 0 service
     seller_id = Column(String(60), nullable=False)
     buyer_id = Column(String(60), nullable=False)
     name = Column(String(128), nullable=False)
