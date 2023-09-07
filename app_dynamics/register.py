@@ -99,7 +99,7 @@ def register_business(user_id, user_name):
             user_byun.business_name = business.name
             storage.new(business)
             storage.new(business)
-            user.save()
+            user_byun.save()
             storage.save()
             flash('Business profile created successfully')
             return redirect(url_for('app_views.profile', user_name=user_name))
