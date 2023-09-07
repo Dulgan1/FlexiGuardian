@@ -84,7 +84,7 @@ def register_business(user_id, user_name):
             if user_byid.business_name:
                 flash('Can not register another Business')
                 return redirect(url_for('app_views.profile',
-                                user_name=user_name)
+                                        user_name=user_name))
             name = request.form['name']
             contacts = request.form['contacts']
             description = request.form['description']
