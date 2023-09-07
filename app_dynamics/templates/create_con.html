@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Contract</title>
+  <!--<link rel="stylesheet" href="styles.css">-->
+  <style>
+  /* Reset some default styles */
+body, h2, p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Global styles */
+body {
+    font-family: Trebuchet MS, Helvetica, sans-serif;
+    background-color: #fff;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.registration-container {
+    max-width: 300px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.registration-container h2 {
+    color: #333;
+}
+
+.input-group {
+    margin: 20px 0;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.error-message {
+    color: red;
+}
+
+.input-group input[type="submit"] {
+    background-color: #007f00;
+    color: #fff;
+    cursor: pointer;
+}
+ 
+/* Existing CSS styles remain the same */
+
+.logo {
+    display: block;
+    margin: 0 auto 20px; /* Center the logo and add some space below */
+    max-width: 70px; /* Adjust the maximum width of the logo */
+}
+.dashboard-card-container {
+    max-width: 540px; /* Adjust the maximum width as needed */                              margin: 20px auto; /* Center the card horizontally */
+    padding: 20px; /* Add padding around the card */                                        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a shadow to the card */
+    text-align: center; /* Center-align the content */                                  }
+.header {                                                                                   display: fixed;
+    background-color: #fff; /* Header background color */                                   color: #aaa; /* Header text color */
+    padding: 20px 0; /* Add padding to the top and bottom */                                text-align: center; /* Center align the content */
+    position: relative; /* Position relative for absolute positioning of user avatar */     border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);                                            }
+.logo-container {
+    margin: 0 auto; /* Center the logo */
+    max-width: 70px; /* Adjust the maximum logo width */
+}
+.search-container {                                                                         margin-top: 20px; /* Add some spacing below the logo */                                 text-align: center; /* Center align the input and button */
+}
+.user-avatar {                                                                              position: absolute; /* Position absolute for alignment */
+    top: 20px; /* Adjust the top position */                                                right: 20px; /* Adjust the right position */
+}
+  </style>
+</head>
+<body>
+	<div class="header">                                                                          <!-- Logo centered at the top -->                                                       <div class="logo-container">                                                                <a href="{{ url_for('app_view.home') }}"><img src="https://i.ibb.co/d6xqVJ2/logo.png" alt="Logo" class="logo"></a>
+        </div>                                                                          
+        <!-- Search input and button -->                                                        <div class="search-container">
+                <h1 id="top-username">{{ user_name }}</h1>                                      </div>
+        <!-- User avatar aligned to the right -->                                               <div class="user-avatar">
+                <a href="{{ url_for('app_views.logout') }}">                                                    <button id="home-login">Logout</button>
+                </a>
+        </div>
+    </div>
+    <div class="dashboard-card-container">
+        <h2>Create Contract</h2>
+	<form id="registration-form"
+		action="{{  url_for('app_views.contract_create',
+		user_name=user.user_name) }}" method="POST">
+            <div class="input-group"> 
+		    <p>Contract Type: </p>
+	    </div>
+            <div class="input-group">
+                <input type="radio" id="Product"  name="c_type" value="Product" required>
+		<label for="Product">Product</label>
+            </div>
+            <div class="input-group">
+                <input type="radio" id="Service" name="c_type" value="Service" required>
+		<label for="Service">Service</label>
+            </div>
+	    <div class="input-group">                                                                   <input type="text" id="name-c" placeholder="Name Of contract" name="name" required>
+            </div>
+	    <div class="input-group">
+		    <textarea id="description" placeholder="Business Description" name="desc" rows="50" cols="50" required></textarea>
+	    </div>
+            <div class="input-group">
+                <input type="tel" id="amount" placeholder="Amount in Naira" name="amount" required>
+            </div>
+		{% if error %}
+		<p id="register-error" class="error-message">{{ error }}</p>
+		{% endif %}
+            </div>
+            <div class="input-group">
+                <input type="submit" value="Create">
+            </div>
+	    <div>
+		<a href="{{ url_for('app_views.login') }}">Login</a> | <a href="{{ url_for('app_views.home')}}">HOME</a> 
+	    </div>
+        </form>
+    </div>
+
+    <script>
+    </script>
+</body>
+</html>
+
