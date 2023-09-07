@@ -249,19 +249,6 @@ body {
             </div>
             <div class="dashboard-info">
 		    <h2 class="profile-name">{{ user.name }}</h2>
-		    <p class="dashboard-description">
-		    {% if user.business_name %} 
-		    <h1>{{ user.business_name }}</h1><br/> 
-		    <p style="text-align:left;"p>{{ business.description }}</p><br/><br/><br/>
-		    <h3> {{ business.contacts }}</h3><br/><br/>
-		    <a href="{{ url_for('app_views.contract_create', user_name=user.user_name )}}">
-			    <button class="create-con">Create Contract</button>
-		    </a>
-
-		    {% else %}
-		    <br/><br/><h4 style="color: red;">* This user has no registered business</h4>
-		    {% endif %}
-		    </p>
                 <div class="dashboard-stats">
                     <div class="stat">
 			    <span class="stat-label">Created</span><br/>
@@ -277,6 +264,19 @@ body {
 			<span class="stat-value">{{ user.updated_at }}</span>
                     </div>
                 </div>
+		<p class="dashboard-description">
+                    {% if user.business_name %}
+                    <h1>{{ user.business_name }}</h1><br/>
+                    <p style="text-align:left;"p>{{ business.description }}</p><br/><br/><br/>
+                    <h3> {{ business.contacts }}</h3><br/><br/>
+                    <a href="{{ url_for('app_views.contract_create', user_name=user.user_name )}}">
+                            <button class="create-con">Create Contract</button>
+                    </a>
+
+                    {% else %}
+                    <br/><br/><h4 style="color: red;">* This user has no registered business</h4>
+                    {% endif %}
+                    </p>
             </div>
         </div>
     </div>
