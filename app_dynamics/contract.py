@@ -70,11 +70,12 @@ def contract_view(user_id, contract_id):
     """View Contract by Seller or Buyer"""
 
     _session = storage.session()
+    logged_user = _session.query(User).filter(User.id==user_id).first()
     contract = _session.query(Contract).\
             filter(Contract.id==contract_id).first()
     if not contract:
-        error = 'Contract Not Found'
-        return render_template('contracts.html', error=error)
+        flash('Contract Not Found')
+        return redirect(url_for('app_views.home'))
     if contract.seller_id == user_id or contract.buyer_id == user_id:
         buyer = _session.query(User).filter(User.id==contract.buyer_id).first()
         buyer_un = buyer.user_name
@@ -87,7 +88,10 @@ def contract_view(user_id, contract_id):
                                contract_status=contract.status,
                                contract_amount=contract.amount,
                                contract_d=contract.disputed,
-                               contract_type=contract.c_type)
+                               contract_type=contract.c_type,
+                               contract_create_date=contract.created_at,
+                               contract_update_date=contract.updated_at,
+                               logged_user=logged_user.user_name)
     else:
         flash('Unaccessible Contract')
         return redirect(url_for('app_views.home'))
