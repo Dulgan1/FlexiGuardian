@@ -98,7 +98,7 @@ body {
         <h2>Create Contract</h2>
 	<form id="registration-form"
 		action="{{  url_for('app_views.contract_create',
-		user_name=username) }}" method="POST">
+		user_name=user_name) }}" method="POST">
             <div class="input-group"> 
 		    <p>Contract Type: </p>
 	    </div>
@@ -126,7 +126,7 @@ body {
                 <input type="submit" value="Create">
             </div>
 	    <div>
-		<a href="{{ url_for('app_views.login') }}">Login</a> | <a href="{{ url_for('app_views.home')}}">HOME</a> 
+		<a href="{{ url_for('app_views.home')}}">HOME</a> 
 	    </div>
         </form>
     </div>
