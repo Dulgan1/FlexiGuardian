@@ -2,7 +2,7 @@
 """Handles routes for contract"""
 from app_dynamics import app_views
 from app_dynamics.auth import requires_token
-from flask import redirect, session, request, render_template, flash
+from flask import redirect, session, request, render_template, flash, url_for
 from models.contract import Contract
 from models.user import Review, User
 from models import storage
@@ -55,7 +55,7 @@ def rate_contract(user_id, contract_id):
             storage.save()
             calc_tot_rate(seller_id)
             flash('Review submitted successfully')
-            return redirect(url_for('contracts'))
+            return redirect(url_for('app_views.contract_view', contract_id=contract_id))
         error = 'Can not update data, not a participant'
         return render_template('dashboard.html', error=error)
     return render_template('contractrate.html')
@@ -119,7 +119,7 @@ def contract_create(user_id, user_name):
         storage.new(new_contract)
         storage.save()
         flash('Contract created successfully')
-        return redirect(url_for('contracts'))
+        return redirect(url_for('app_views.contract_view', contract_id=new_contract.id))
     return render_template('create_con.html', user_name=user_name)
 
 @app_views.route('/contracts', methods=['GET'], strict_slashes=False)
