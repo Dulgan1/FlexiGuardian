@@ -3,6 +3,7 @@ from app_dynamics.auth import requires_token
 from models import storage
 from models.user import User
 from models.business import Business
+from models.address import Address
 import re
 import random
 import uuid
