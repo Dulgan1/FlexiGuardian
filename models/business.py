@@ -12,4 +12,4 @@ class Business(BaseModel, Base):
     image_url = Column(String(500))
 
     def __init__(self, *args, **kwargs):
-        super().__init(*args,**kwargs)
+        super().__init__(*args,**kwargs)
