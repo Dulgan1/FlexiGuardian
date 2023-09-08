@@ -114,6 +114,6 @@ def profile(user_name):
         if session['user_id'] == user.id:
             return render_template('dashboard.html', user_name=user_name,
                                    logged_user=user, business=business,
-                                   cache_id=uuid.uuid4)
+                                   cache_id=uuid.uuid4())
     return render_template('user.html', user_name=user_name,
                            business=business, user=user, cache_id=uuid.uuid4)

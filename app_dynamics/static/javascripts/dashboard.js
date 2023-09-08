@@ -1,6 +1,6 @@
 $(document).ready(function () {
   const username = document.getElementById("top-username").textContent
-  const url_ = 'https://www.dulgan.tech/api/v1/' + username + '/contracts'
+  const url_ = 'http://www.dulgan.tech/api/v1/' + username + '/contracts'
   $(function () {
     $.ajax({
       type: 'GET',
