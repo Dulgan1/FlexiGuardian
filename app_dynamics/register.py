@@ -109,11 +109,19 @@ def register_business(user_id, user_name):
 def profile(user_name):
     _session = storage.session()
     user = _session.query(User).filter(User.user_name==user_name).first()
-    business = _session.query(Business).filter(Business.user_id==user.id).first()
+    business = _session.query(Business).\
+            filter(Business.user_id==user.id).first()
+    contracts_as_s = _session.query(Contract).\
+            filter(Contract.seller_id==user.id).all()
+    contracts_as_b = _session.query(Contract).\
+            filter(Contract.buyer_id==user.id).all()
     if 'user_id' in session:
         if session['user_id'] == user.id:
             return render_template('dashboard.html', user_name=user_name,
                                    logged_user=user, business=business,
-                                   cache_id=uuid.uuid4())
+                                   cache_id=uuid.uuid4(),
+                                   contract_as_b=contract_as_b,
+                                   contract_as_s=contract_as_s)
     return render_template('user.html', user_name=user_name,
-                           business=business, user=user, cache_id=uuid.uuid4)
+                           business=business, user=user,
+                           cache_id=uuid.uuid4())
