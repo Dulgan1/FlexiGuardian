@@ -126,7 +126,13 @@ def contract_create(user_id, user_name):
         return redirect(url_for('app_views.contract_view', contract_id=new_contract.id))
     return render_template('create_con.html', user_name=user_name)
 
-@app_views.route('/contracts', methods=['GET'], strict_slashes=False)
+@app_views.route('/<user_name>/contracts', methods=['GET'], strict_slashes=False)
 @requires_token
-def get_contracts(user_id):
-    return render_template('contracts.html')
+def get_contracts(user_id, user_name):
+    _session = storage.session()
+    user = _session.query(User).filter(User.user_name==user_name).first()
+    contracts_as_s = _session.query(Contract).\
+            filter(Contract.seller_id==user.id).all()
+    contracts_as_b = _session.query(Contract).\
+            filter(Contract.buyer_id==user.id).all()
+    return render_template('404.html')
