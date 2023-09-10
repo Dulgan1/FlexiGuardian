@@ -295,7 +295,7 @@ body {
                 </tr>
             </thead>
             <tbody id="seller">
-	     {% if contract_as_s %}
+	     {% if contracts_as_s %}
 	     {% for contract in contract_as_s %}
 	         <tr>
 		    <td>{{ contract['id'] }}</td>
@@ -305,7 +305,10 @@ body {
 		    <td>{{contract['amount']}}</td>
                     <td>{{contract['user_as_s']}}</td>                                            <td>{{contract['user_as_s']}}</td>
                     <td>{{contract['created_at']}}</td>                                           <td>{{contract['status']}}<td>                                              </tr>
-            {% endfor %}                                                                  {% else %}                                                                    <h1>No Contracts</h1>                                                         {% endif %}
+	       {% endfor %}
+	       {% else %}
+	       <tr><h1>No Contracts</h1></tr>
+	       {% endif %}
             </tbody>
         </table>
     </div>
@@ -323,7 +326,7 @@ body {
                 </tr>
             </thead>
             <tbody id="buyer">
-	    {% if contract_as_b %}
+	    {% if contracts_as_b %}
 	    {% for contract in contract_as_b %}
 	    <tr>
 		    <td>{{ contract['id'] }}</td>
@@ -338,7 +341,7 @@ body {
                   </tr>
 	    {% endfor %}
 	    {% else %}
-	    <h1>No Contracts</h1>
+	    <tr><h1>No Contracts</h1></tr>
 	    {% endif %}
             </tbody>
         </table>
