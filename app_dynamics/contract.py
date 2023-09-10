@@ -140,7 +140,7 @@ def get_contracts(user_id, user_name):
     return render_template('404.html')
 
 @app_views.route('/contracts/<contract_id>/dispute',
-                 methods=['POST'], strict_slashes=False)
+                 methods=['GET'], strict_slashes=False)
 @requires_token
 def dispute_contract(user_id, contract_id):
     contract = _session.query(Contract).\
