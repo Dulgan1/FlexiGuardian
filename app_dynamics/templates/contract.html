@@ -282,9 +282,15 @@ body {
 		    <h1>Seller: {{ seller_un }} </h1>
                     <p style="text-align:left;"p>{{ description }}</p><br/><br/><br/>
                     <h3>&#8358;{{ contract_amount }}</h3><br/><br/> 
-                    <a href="{{ url_for('app_views.rate_contract', contract_id=contract_id )}}">
+		    {% if logged_user == buyer_un %}
+		    <a href="{{ url_for('app_views.rate_contract', contract_id=contract_id )}}">
                             <button class="create-con">Rate User</button>
                     </a>
+		    {% else %}
+		    <a href="{{ url_for('app_views.close_con', contract_id=contract_id )}}">
+			    <button class="create-con">Close</button>
+		    </a>
+		    {% endif %}
 		    {% if seller_un == logged_user and contract_status == "created" %}
 			<button class="create-con" id="acceptcon">Accept</button>
 		    {% endif %}
