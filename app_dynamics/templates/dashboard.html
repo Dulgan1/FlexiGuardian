@@ -296,7 +296,7 @@ body {
             </thead>
             <tbody id="seller">
 	     {% if contracts_as_s %}
-	     {% for contract in contract_as_s %}
+	     {% for contract in contracts_as_s %}
 	         <tr>
 		    <td>{{ contract['id'] }}</td>
 		    <td>
@@ -327,7 +327,7 @@ body {
             </thead>
             <tbody id="buyer">
 	    {% if contracts_as_b %}
-	    {% for contract in contract_as_b %}
+	    {% for contract in contracts_as_b %}
 	    <tr>
 		    <td>{{ contract['id'] }}</td>
 		    <td>
