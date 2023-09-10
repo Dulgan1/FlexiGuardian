@@ -289,7 +289,9 @@ body {
 			<button class="create-con" id="acceptcon">Accept</button>
 		    {% endif %}
 		    {% if buyer_un == logged_user %}
-			<button class="create-con2" id="cancelcon">Cancel Contract</button>
+		       {% if contract_status != "closed" or contract_status != "cancelled" %}
+		       <a href="{{ url_for('app_views.cancel_con', contract_id=contract_id)}}"><button class="create-con2" id="cancelcon">Cancel Contract</button></a>
+			{% endif %}
 		        {% if contract_status != "disputed" %}
 			<a href="{{ url_for('app_views.dispute_contract', contract_id=contract_id)}}"><button class="create-con2" id="disputecon">Dispute</button></a>
 			{% endif %}
