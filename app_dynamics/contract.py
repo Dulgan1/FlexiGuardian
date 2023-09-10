@@ -33,10 +33,10 @@ def calc_tot_rate(user_id):
 @requires_token
 def rate_contract(user_id, contract_id):
     """Rating and review of contract by Buyer"""
+    _session = storage.session()
     contract = _session.query(Contract).\
             filter(Contract.id==contract_id).first()
     if request.method == 'POST':
-        _session = storage.session()
         if not contract:
             error = 'No such contract'
             return render_template('dashboard.html', error=error)
