@@ -2,6 +2,7 @@ from app_dynamics import app_views
 from app_dynamics.auth import requires_token
 from models import storage
 from models.user import User
+from models.contract import Contract
 from models.business import Business
 from models.address import Address
 import re
@@ -115,13 +116,37 @@ def profile(user_name):
             filter(Contract.seller_id==user.id).all()
     contracts_as_b = _session.query(Contract).\
             filter(Contract.buyer_id==user.id).all()
+    as_s_list = []
+    as_b_list = []
+    for con in contracts_as_s:
+        con = con.to_dict()
+        user_as_b = _session.query(User).\
+                filter(User.id==con['buyer_id']).first()
+        user_as_s = _session.query(User).\
+                filter(User.id==con['seller_id']).first()
+        user_as_s = user_as_s.user_name
+        user_as_b = user_as_b.user_name
+        con['user_as_b'] = user_as_b
+        con['user_as_s'] = user_as_s
+        as_s_list.append(con)
+    for con in contracts_as_b:
+        con = con.to_dict()
+        user_as_b = _session.query(User).\
+                filter(User.id==con['buyer_id']).first()
+        user_as_s = _session.query(User).\
+                filter(User.id==con['seller_id']).first()
+        user_as_s = user_as_s.user_name
+        user_as_b = user_as_b.user_name
+        con['user_as_b'] = user_as_b
+        con['user_as_s'] = user_as_s
+        as_b_list.append(con)
     if 'user_id' in session:
         if session['user_id'] == user.id:
             return render_template('dashboard.html', user_name=user_name,
                                    logged_user=user, business=business,
                                    cache_id=uuid.uuid4(),
-                                   contract_as_b=contract_as_b,
-                                   contract_as_s=contract_as_s)
+                                   contracts_as_b=as_b_list,
+                                   contracts_as_s=as_s_list)
     return render_template('user.html', user_name=user_name,
                            business=business, user=user,
                            cache_id=uuid.uuid4())
