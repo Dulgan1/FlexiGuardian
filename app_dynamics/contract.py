@@ -143,6 +143,7 @@ def get_contracts(user_id, user_name):
                  methods=['GET'], strict_slashes=False)
 @requires_token
 def dispute_contract(user_id, contract_id):
+    _session = storage.session()
     contract = _session.query(Contract).\
             filter(Contract.id==contract_id).first()
     if not contract:
