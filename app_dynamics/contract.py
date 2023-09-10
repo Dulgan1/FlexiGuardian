@@ -209,7 +209,7 @@ def close_con(user_id, contract_id):
     if not contract:
         return render_template('404.html')
     if user_id == contract.buyer_id:
-        contract.status = 'cancelled'
+        contract.status = 'closed'
         storage.save()
         return redirect(url_for('app_views.profile',
                                 user_name=user.user_name))
