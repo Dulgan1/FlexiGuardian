@@ -303,7 +303,7 @@ body {
                             <a href="{{ url_for('app_views.contract_view', contract_id=contract['id']) }}">{{ contract['name'] }} </a></td>
 		    <td>{{contract['description']}}</td>
 		    <td>{{contract['amount']}}</td>
-                    <td>{{contract['user_as_s']}}</td>                                            <td>{{contract['user_as_s']}}</td>
+                    <td>{{contract['user_as_b']}}</td>                                            <td>{{contract['user_as_s']}}</td>
                     <td>{{contract['created_at']}}</td>                                           <td>{{contract['status']}}<td>                                              </tr>
 	       {% endfor %}
 	       {% else %}
@@ -334,7 +334,7 @@ body {
 			    <a href="{{ url_for('app_views.contract_view', contract_id=contract['id']) }}">{{ contract['name'] }} </a>
 		    </td>                                                                         <td>{{contract['description']}}</td>
 		    <td>{{contract['amount']}}</td>
-		    <td>{{contract['user_as_s']}}</td>
+		    <td>{{contract['user_as_b']}}</td>
 		    <td>{{contract['user_as_s']}}</td>
 		    <td>{{contract['created_at']}}</td>
 		    <td>{{contract['status']}}<td>
