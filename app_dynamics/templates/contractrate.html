@@ -97,8 +97,7 @@ body {
     <div class="dashboard-card-container">
         <h2>Rate Contract</h2>
 	<form id="registration-form"
-		action="{{  url_for('app_views.contract_create',
-		user_name=user_name) }}" method="POST">
+		action="{{ url_for('app_views.rate_contract', contract_id=contract.id) }}" method="POST">
 	    <div class="input-group">
 		    <label> Rate: 1 - 5 </label></br>
 		    <input type="range" id="name-c"  min="0" max="5", step="1" name="rate" required>
