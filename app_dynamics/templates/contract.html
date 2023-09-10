@@ -129,8 +129,8 @@ body {
     cursor: pointer;
 }
 .create-con2 {                                                                               padding: 10px 20px; /* Adjust padding for button */
-    background-color: #007f00; /* Button background color */
-    color: red; /* Button text color */
+    background-color: red; /* Button background color */
+    color: #fff; /* Button text color */
     border: none; /* Remove button border */
     border-radius: 5px; /* Rounded corners */
     cursor: pointer;
@@ -290,7 +290,7 @@ body {
 		    {% endif %}
 		    {% if buyer_un == logged_user %}
 			<button class="create-con2" id="cancelcon">Cancel Contract</button>
-			<button class="create-con2" id="disputecon">Dispute</button>
+			<a href="{{ url_for('app_views.dispute_contract', contract_id=contract_id)}}"><button class="create-con2" id="disputecon">Dispute</button>
 		    {% endif %}
 
             </div>

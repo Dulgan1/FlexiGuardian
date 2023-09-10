@@ -136,3 +136,24 @@ def get_contracts(user_id, user_name):
     contracts_as_b = _session.query(Contract).\
             filter(Contract.buyer_id==user.id).all()
     return render_template('404.html')
+
+@app_views.route('/contracts/<contract_id>/dispute',
+                 methods=['POST'], strict_slashes=False)
+@requires_token
+def dispute_contract(user_id, contract_id):
+    contract = _session.query(Contract).\
+            filter(Contract.id==contract_id).first()
+    if not contract:
+        return render_template('404.html')
+    if user_id == contract.buyer_id:
+        note = 'Unsatisfied and disputed'
+        review = Review(by_user_id=user_id, for_user_id=contract.seller_id,
+                        review_body=note, rating=0)
+        contract.disputed = 1
+        contract.status = 'disputed'
+        storage.new(review)
+        storage.save()
+        return redirect(url_for('app_views.contract_view',
+                                contract_id=contract_id))
+
+
