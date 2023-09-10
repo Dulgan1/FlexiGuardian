@@ -10,6 +10,7 @@ class Contract(BaseModel, Base):
     c_type = Column(String(10), nullable=False) # 1 product, 0 service
     seller_id = Column(String(60), nullable=False)
     buyer_id = Column(String(60), nullable=False)
+    review_id = Column(String(60))
     name = Column(String(128), nullable=False)
     description = Column(String(5000), nullable=False)
     disputed = Column(Integer, default=0)

@@ -54,6 +54,7 @@ def rate_contract(user_id, contract_id):
                                 for_user_id=seller_id,
                                 review_body=review, rating=rate)
             storage.new(new_review)
+            contract.review_id = new_review.id
             storage.save()
             calc_tot_rate(seller_id)
             flash('Review submitted successfully')
@@ -83,6 +84,8 @@ def contract_view(user_id, contract_id):
         buyer_un = buyer.user_name
         seller = _session.query(User).filter(User.id==contract.seller_id).first()
         seller_un = seller.user_name
+        review = _session.query(Review).\
+                filter(Review.id==contract.review_id).first()
         return render_template('contract.html', contract_id=contract.id,
                                contract_name=contract.name,
                                buyer_un=buyer_un, seller_un=seller_un,
@@ -93,7 +96,8 @@ def contract_view(user_id, contract_id):
                                contract_type=contract.c_type,
                                contract_create_date=contract.created_at,
                                contract_update_date=contract.updated_at,
-                               logged_user=logged_user.user_name)
+                               logged_user=logged_user.user_name,
+                               review=review)
     else:
         flash('Unaccessible Contract')
         return redirect(url_for('app_views.home'))
@@ -154,6 +158,7 @@ def dispute_contract(user_id, contract_id):
                         review_body=note, rating=0)
         contract.disputed = 1
         contract.status = 'disputed'
+        contract.review_id = review.id
         storage.new(review)
         storage.save()
         return redirect(url_for('app_views.contract_view',
