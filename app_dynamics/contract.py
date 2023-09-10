@@ -2,7 +2,9 @@
 """Handles routes for contract"""
 from app_dynamics import app_views
 from app_dynamics.auth import requires_token
-from flask import redirect, session, request, render_template, flash, url_for
+from flask import (redirect, session,
+                   request, render_template,
+                   flash, url_for)
 from models.contract import Contract
 from models.user import Review, User
 from models import storage
@@ -156,4 +158,22 @@ def dispute_contract(user_id, contract_id):
         return redirect(url_for('app_views.contract_view',
                                 contract_id=contract_id))
 
+@app_views.route('/contracts/<contract_id>/initiate',
+                 methods=['POST'], strict_slashes=False)
+@requires_token
+def initiate_con(user_id, contract_id):
+    _session = storage.session()
+    user = _session.query(User).filter(User.id==user_id).first()
+    contract = _session.query(Contract).\
+            filter(Contract.id==contract_id).first()
+    if not contract:
+        return render_template('404.html')
 
+    if user_id == contract.seller_id:
+        contract.status = 'ongoing'
+        storage.save()
+        return redirect(url_for('app_views.profile',
+                                user_name=user.user_name))
+    else:
+        return redirect(url_for('app_views.profile',
+                                user_name=user.user_name))
