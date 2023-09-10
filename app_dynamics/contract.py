@@ -197,3 +197,22 @@ def cancel_con(user_id, contract_id):
     else:
         return redirect(url_for('app_views.profile',
                                 user_name=user.user_name))
+
+@app_views.route('/contracts/<contract_id>/close',
+                 methods=['GET'], strict_slashes=False)
+@requires_token
+def close_con(user_id, contract_id):
+    _session = storage.session()
+    user = _session.query(User).filter(User.id==user_id).first()
+    contract = _session.query(Contract).\
+                         filter(Contract.id==contract_id).first()
+    if not contract:
+        return render_template('404.html')
+    if user_id == contract.buyer_id:
+        contract.status = 'cancelled'
+        storage.save()
+        return redirect(url_for('app_views.profile',
+                                user_name=user.user_name))
+    else:
+        return redirect(url_for('app_views.profile',
+                                user_name=user.user_name))
