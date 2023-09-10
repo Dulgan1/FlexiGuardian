@@ -61,7 +61,7 @@ def rate_contract(user_id, contract_id):
             return redirect(url_for('app_views.contract_view', contract_id=contract_id))
         error = 'Can not update data, not a participant'
         return render_template('dashboard.html', error=error)
-    return render_template('contractrate.html')
+    return render_template('contractrate.html', contract=contract)
 
 
 #TODO: CREATE API ROUTE TO VIEW ALL CONTRACTS FOR USER for '/contracts'
