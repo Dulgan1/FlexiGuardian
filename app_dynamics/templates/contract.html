@@ -290,7 +290,9 @@ body {
 		    {% endif %}
 		    {% if buyer_un == logged_user %}
 			<button class="create-con2" id="cancelcon">Cancel Contract</button>
+		        {% if contract_status != "disputed" %}
 			<a href="{{ url_for('app_views.dispute_contract', contract_id=contract_id)}}"><button class="create-con2" id="disputecon">Dispute</button></a>
+			{% endif %}
 		    {% endif %}
 
             </div>
