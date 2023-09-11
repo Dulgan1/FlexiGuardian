@@ -61,7 +61,7 @@ def logout():
 
 @app_views.route('/search/<squery>', methods=['GET'],
                  strict_slashes=False)
-def search(squery)
+def search(squery):
     _session = storage.session()
     users = _session.query(User).filter(User.name.match(squery)).all()
     users_u = _session.query(User).\
