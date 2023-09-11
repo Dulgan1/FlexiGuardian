@@ -6,6 +6,7 @@ from flask import (session, flash,
                    redirect, url_for)
 from models import storage
 from models.user import User
+from models.business import Business
 from werkzeug.security import check_password_hash
 """ Route Login """
 
