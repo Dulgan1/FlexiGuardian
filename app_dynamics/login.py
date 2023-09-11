@@ -11,7 +11,7 @@ from werkzeug.security import check_password_hash
 
 
 @app_views.route('/home', methods=['GET', 'POST'], strict_slashes=False)
-@app_views.route('/')
+@app_views.route('/', methods=['GET', 'POST'], strict_slashes=False)
 def home():
     if request.method == 'GET':
         _session = storage.session()

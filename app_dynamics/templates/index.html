@@ -137,8 +137,10 @@ body {
         </div>
 
         <!-- Search input and button -->                                                        <div class="search-container">
+	   <form action="{{ url_for('app_views.home') }}" method="POST">
             <input type="text" id="search" placeholder="Search">
-            <button id="search-button">Search</button>
+            <button id="search-button" type="submit">Search</button>
+	    </form>
         </div>                                                                          
         <!-- User avatar aligned to the right -->
         <div class="user-avatar">
