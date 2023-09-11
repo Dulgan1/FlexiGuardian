@@ -66,7 +66,7 @@ def search(squery):
     users = _session.query(User).\
             filter(User.name.like('%{}%'.format(squery))).all()
     users_u = _session.query(User).\
-            filter(User.user_name.match('%{}%'.format(squery))).all()
+            filter(User.user_name.like('%{}%'.format(squery))).all()
     users.append(users_u)
     businesses = _session.query(Business).\
             filter(Business.name.like('%{}%'.format(squery))).all()
