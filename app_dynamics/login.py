@@ -10,17 +10,21 @@ from werkzeug.security import check_password_hash
 """ Route Login """
 
 
-@app_views.route('/home', strict_slashes=False)
+@app_views.route('/home', methods=['GET', 'POST']strict_slashes=False)
 @app_views.route('/')
 def home():
-    _session = storage.session()
-    users = _session.query(User).order_by(User.rating.desc()).all()
-    if 'user_id' in session:
-        logged_user = _session.query(User).\
-                filter(User.id==session['user_id']).first()
-        return render_template('index2.html', users=users, logged_user=logged_user)
-    return render_template('index.html', users=users)
-
+    if request.method == 'GET':
+        _session = storage.session()
+        users = _session.query(User).order_by(User.rating.desc()).all()
+        if 'user_id' in session:
+            logged_user = _session.query(User).\
+                    filter(User.id==session['user_id']).first()
+            return render_template('index2.html',
+                                   users=users, logged_user=logged_user)
+        return render_template('index.html', users=users)
+    elif request.method == 'POST':
+        squery = request.form['query']
+        return redirect(url_for('app_views.search', squery=squery))
 
 @app_views.route('/login', methods=['GET', 'POST'], strict_slashes=False)
 def login():
@@ -54,3 +58,33 @@ def logout():
     except:
         return redirect(url_for('app_views.home'))
     return redirect(url_for('app_views.login'))
+
+@app_views.route('/search/<squery>', methods=['GET'],
+                 strict_slashes=False)
+def search(squery)
+    _session = storage.session()
+    users = _session.query(User).filter(User.name.match(squery)).all()
+    users_u = _session.query(User).\
+            filter(User.user_name.match(squery)).all()
+    users.append(users_u)
+    businesses = _session.query(Business).\
+            filter(Business.name.match(squery)).all()
+    busi_desc = _session.query(Business).\
+            filter(Business.description.match(squery)).all()
+    for business in businesses:
+        user = _session.query(User).\
+                filter(User.id==business.user_id).first()
+        users.append(user)
+    for business in busi_desc:
+        user = _session.query(User).\
+                filter(User.id==business.user_id).first()
+        users.append(user)
+    users = set(users)
+    users = list(users)
+
+    if 'user_id' in session:
+        logged_user = _session.query(User).\
+                filter(User.id==session['user_id']).first()
+        return render_template('index2.html',
+                                users=users, logged_user=logged_user)
+    return render_template('index.html', users=users)
