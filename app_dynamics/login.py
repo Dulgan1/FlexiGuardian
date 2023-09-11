@@ -63,14 +63,15 @@ def logout():
                  strict_slashes=False)
 def search(squery):
     _session = storage.session()
-    users = _session.query(User).filter(User.name.match(squery)).all()
+    users = _session.query(User).\
+            filter(User.name.like('%{}%'.format(squery))).all()
     users_u = _session.query(User).\
-            filter(User.user_name.match(squery)).all()
+            filter(User.user_name.match('%{}%'.format(squery))).all()
     users.append(users_u)
     businesses = _session.query(Business).\
-            filter(Business.name.match(squery)).all()
+            filter(Business.name.like('%{}%'.format(squery))).all()
     busi_desc = _session.query(Business).\
-            filter(Business.description.match(squery)).all()
+            filter(Business.description.like('%{}%'.format(squery))).all()
     for business in businesses:
         user = _session.query(User).\
                 filter(User.id==business.user_id).first()
