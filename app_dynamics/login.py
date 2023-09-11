@@ -10,7 +10,7 @@ from werkzeug.security import check_password_hash
 """ Route Login """
 
 
-@app_views.route('/home', methods=['GET', 'POST']strict_slashes=False)
+@app_views.route('/home', methods=['GET', 'POST'], strict_slashes=False)
 @app_views.route('/')
 def home():
     if request.method == 'GET':
