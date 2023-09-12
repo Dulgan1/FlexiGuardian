@@ -25,7 +25,13 @@ def home():
         return render_template('index.html', users=users)
     elif request.method == 'POST':
         squery = request.form['query']
-        return redirect(url_for('app_views.search', squery=squery))
+        users = search(squery)
+        if 'user_id' in session:
+            logged_user = _session.query(User).\
+                    filter(User.id==session['user_id']).first()
+            return render_template('index2.html',
+                                   users=users, logged_user=logged_user)
+        return render_template('index.html', users=users)
 
 @app_views.route('/login', methods=['GET', 'POST'], strict_slashes=False)
 def login():
@@ -60,8 +66,6 @@ def logout():
         return redirect(url_for('app_views.home'))
     return redirect(url_for('app_views.login'))
 
-@app_views.route('/search/<squery>', methods=['GET'],
-                 strict_slashes=False)
 def search(squery):
     _session = storage.session()
     userss = _session.query(User).\
@@ -87,10 +91,4 @@ def search(squery):
     for user in userss:
         if user not in users:
             users.append(user)
-
-    if 'user_id' in session:
-        logged_user = _session.query(User).\
-                filter(User.id==session['user_id']).first()
-        return render_template('index2.html',
-                                users=users, logged_user=logged_user)
-    return render_template('index.html', users=users)
+    return users
