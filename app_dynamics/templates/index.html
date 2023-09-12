@@ -138,7 +138,7 @@ body {
 
         <!-- Search input and button -->                                                        <div class="search-container">
 	   <form action="{{ url_for('app_views.home') }}" method="POST">
-            <input type="text" id="search" placeholder="Search">
+            <input type="text" id="search" placeholder="Search" name="query">
             <button id="search-button" type="submit">Search</button>
 	    </form>
         </div>                                                                          
