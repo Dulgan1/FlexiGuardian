@@ -165,7 +165,7 @@ body {
 	    <p>{{ user.business_name }}</p>
             <div class="rating">
                 <span>Rating:</span>
-		<span style="color: yellow">{{user.rating}}</span>
+		<span style="color: #8B8000">{{user.rating}}</span>
             </div>
 	    <a href="{{ url_for('app_views.profile', user_name=user.user_name) }}"><button class="create-con">Request</button></a>
         </div>
