@@ -150,6 +150,7 @@ body {
         </div>
     </div>
     <div class="user-profiles">
+	{% if users %}
 	{% for user in users %}
 	{% if user %}
         <div class="profile-card">
@@ -170,6 +171,9 @@ body {
         </div>
 	{% endif %}
 	{% endfor %}
+	{% else %}
+	<div class="profile-card" style="text-align: center;"><h1>No Search Result</h1></div>
+        {% endif %}
     </div>
 </body>
 </html>
