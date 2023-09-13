@@ -17,6 +17,8 @@ body {
 
 /* Header styles */
 .header {
+    top: 0;
+    width: 100%;
     position: fixed;
     background-color: #007f00;
     color: #fff;
@@ -103,6 +105,7 @@ h2 {
 
 /* Footer styles */
 .footer {
+    bottom: 0;
     position: fixed;
     background-color: #333;
     color: #fff;
