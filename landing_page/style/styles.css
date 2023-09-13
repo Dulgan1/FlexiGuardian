@@ -1,6 +1,3 @@
-/* styles.css */
-
-/* Reset default margin and padding */
 * {
     margin: 0;
     padding: 0;
@@ -12,7 +9,7 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f7f7f7;
     color: #333;
-    text-align: center; /* Center-align all text content */
+    text-align: center;
 }
 
 /* Header styles */
@@ -23,7 +20,7 @@ body {
     background-color: #007f00;
     color: #fff;
     display: flex;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
     align-items: center;
     padding: 20px 0;
 }
@@ -71,8 +68,8 @@ nav a:hover {
 
 .cover-content {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    /*top: 50%;*/
+    /*left: 50%;*/
     transform: translate(-50%, -50%);
     background-color: rgba(0, 0, 0, 0.7);
     padding: 20px;
