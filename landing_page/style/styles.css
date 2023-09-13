@@ -89,7 +89,7 @@ h2 {
 /* Call-to-action button */
 .btn {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 30px 20px;
     background-color: #007f00;
     color: #fff;
     text-decoration: none;
@@ -106,6 +106,7 @@ h2 {
     position: fixed;
     background-color: #333;
     color: #fff;
+    max-width: 100%;
     text-align: center;
     padding: 20px;
 }
