@@ -17,13 +17,15 @@ body {
 
 /* Header styles */
 .header {
+    top: 0;
+    width: 100%;
     position: fixed;
     background-color: #007f00;
     color: #fff;
     display: flex;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
     align-items: center;
-    padding: 20px;
+    padding: 20px 0;
 }
 
 .logo {
@@ -69,8 +71,8 @@ nav a:hover {
 
 .cover-content {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    /*top: 50%;*/
+    /*left: 50%;*/
     transform: translate(-50%, -50%);
     background-color: rgba(0, 0, 0, 0.7);
     padding: 20px;
@@ -90,7 +92,7 @@ h2 {
 .btn {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #007f00;
+    background-color: #FAD5A5;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
@@ -103,10 +105,12 @@ h2 {
 
 /* Footer styles */
 .footer {
+    bottom: 0;
     position: fixed;
     background-color: #333;
     color: #fff;
+    width: 100%;
     text-align: center;
-    padding: 20px;
+    padding: 20px 0;
 }
 
