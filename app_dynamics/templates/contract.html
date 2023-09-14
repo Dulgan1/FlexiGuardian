@@ -278,8 +278,8 @@ body {
                 </div>
 		<p class="dashboard-description">
                     <h1>{{ contract_type }}</h1><br/>
-		    <h1>Buyer: <a href="{{ url_for('app_view.profile', user_name=buyer_un)}}">{{ buyer_un }}</a></h1>
-		    <h1>Seller: {{ seller_un }} </h1>
+		    <h1>Buyer: <a href="{{ url_for('app_views.profile', user_name=buyer_un)}}">{{ buyer_un }}</a></h1>
+		    <h1>Seller:<a href="{{ url_for('app_views.profile', username=seller_un)}}"> {{ seller_un }} </a></h1>
                     <p style="text-align:left;"p>{{ description }}</p><br/><br/><br/>
                     <h3>&#8358;{{ contract_amount }}</h3><br/><br/> 
 		    {% if logged_user == buyer_un %}
