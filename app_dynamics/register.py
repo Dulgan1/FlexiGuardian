@@ -147,6 +147,8 @@ def profile(user_name):
                                    cache_id=uuid.uuid4(),
                                    contracts_as_b=as_b_list,
                                    contracts_as_s=as_s_list)
+    reviews = _session.query(Review).\
+            filter(Review.for_user_id==user.id).first()
     return render_template('user.html', user_name=user_name,
                            business=business, user=user,
-                           cache_id=uuid.uuid4())
+                           cache_id=uuid.uuid4(), reviews=reviews)
