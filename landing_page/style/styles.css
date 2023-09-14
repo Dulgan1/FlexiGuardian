@@ -45,7 +45,7 @@ body {
     top: 0;
     width: 100%;
     position: fixed;
-    background-color: #007f00;
+    background-color: #333;
     color: #fff;
     display: flex;
     justify-content: space-between;
