@@ -42,7 +42,7 @@ body {
 }
 
 .input-group input[type="submit"] {
-    background-color: #007f00;
+    background-color: #13F2B2;
     color: #fff;
     cursor: pointer;
 }
@@ -79,7 +79,7 @@ body {
 
 #search-button {
     padding: 10px 20px; /* Adjust padding for button */
-    background-color: #007f00; /* Button background color */
+    background-color: #13F2B2; /* Button background color */
     color: #fff; /* Button text color */
     border: none; /* Remove button border */
     border-radius: 5px; /* Rounded corners */
@@ -101,12 +101,12 @@ body {
 
 #home-login {
     padding: 0px 20px; /* Adjust padding for button */
-    background-color: #007f00; /* Button background color */                                color: #fff; /* Button text color */                                                    border: none; /* Remove button border */
+    background-color: #13F2B2; /* Button background color */                                color: #fff; /* Button text color */                                                    border: none; /* Remove button border */
     border-radius: 5px; /* Rounded corners */
     cursor: pointer;
 }
 #create-con {
-    padding: 0px 20px; /* Adjust padding for button */                                      background-color: #007f00; /* Button background color */
+    padding: 0px 20px; /* Adjust padding for button */                                      background-color: #13F2B2; /* Button background color */
     color: #fff; /* Button text color */
     border: none; /* Remove button border */
     border-radius: 5px; /* Rounded corners */
