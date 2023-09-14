@@ -1,7 +1,7 @@
 from app_dynamics import app_views
 from app_dynamics.auth import requires_token
 from models import storage
-from models.user import User
+from models.user import User, Review
 from models.contract import Contract
 from models.business import Business
 from models.address import Address
