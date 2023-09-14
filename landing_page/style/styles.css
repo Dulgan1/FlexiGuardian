@@ -127,7 +127,9 @@ h2 {
 .btn:hover {
     background-color: #005e00;
 }
-
+.about, .features, .cover-section {
+    padding: 8px 8px 8px 8px;
+}
 /* Footer styles */
 .footer {
     bottom: 0;
