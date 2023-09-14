@@ -281,7 +281,10 @@ body {
         </div>
     </div>
     <h1 class="table-heading">Reviews</h1>
-    <div class="table-container">
+    <div class="table-container">                                                        {% if review %}                                                               <p>{{ review.review_body }}</p>                                               <div class="stat">                                                                    <span class="stat-label">Created</span><br/>                                  <span class="stat-value">{{ review.created_at }}</span>
+            </div>                                                                        <div class="stat">                                                                    <span class="stat-label">Rated</span><br/>                                    <span class="stat-value">{{ review.rating }}</span>
+            </div>
+            {% endif %}                                                       
     </div>
 </body>
 </html>
