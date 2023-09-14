@@ -25,6 +25,7 @@ def calc_tot_rate(user_id):
         user.rating = total
         storage.save()
         return
+    rate_tot = round(rate_tot, 2)
     user.rating = rate_tot
     storage.save()
 
