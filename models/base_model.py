@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Defines Base Model for all models of FlexiG project"""
+""" Defines Base Model for all models of FlexiGuardian project"""
 from datetime import datetime
 import models
 from sqlalchemy import Column, DateTime, String
@@ -10,6 +10,7 @@ Base = declarative_base()
 
 
 class BaseModel:
+    """ BaseModel Class: the class which any other class inherits from :)"""
     id = Column(String(60), primary_key=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow)
@@ -25,7 +26,7 @@ class BaseModel:
 
     def __str__(self):
         obj_dict = self.to_dict()
-        "Returns string representation of BaseModel instance"""
+        """Returns string representation of BaseModel instance"""
         return "[{}] ({}) {}\n [ObjectDictionary] {}".format(
                 self.__class__.__name__,
                 self.id, self.__dict__, obj_dict)
@@ -41,7 +42,7 @@ class BaseModel:
         return temp
 
     def save(self):
-        """Saves instance to storage(Database)"""
+        """Saves instance to storage (Database)"""
         self.updated_at = datetime.now()
         models.storage.new(self)
         models.storage.save()

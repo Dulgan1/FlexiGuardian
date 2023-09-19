@@ -58,13 +58,11 @@ def rate_contract(user_id, contract_id):
             storage.save()
             calc_tot_rate(seller_id)
             flash('Review submitted successfully')
-            return redirect(url_for('app_views.contract_view', contract_id=contract_id))
+            return redirect(url_for('app_views.contract_view',
+                                    contract_id=contract_id))
         error = 'Can not update data, not a participant'
         return render_template('dashboard.html', error=error)
     return render_template('contractrate.html', contract=contract)
-
-
-#TODO: CREATE API ROUTE TO VIEW ALL CONTRACTS FOR USER for '/contracts'
 
 @app_views.route('/contracts/<contract_id>', methods=['GET'],
                  strict_slashes=False)
@@ -80,9 +78,11 @@ def contract_view(user_id, contract_id):
         flash('Contract Not Found')
         return redirect(url_for('app_views.home'))
     if contract.seller_id == user_id or contract.buyer_id == user_id:
-        buyer = _session.query(User).filter(User.id==contract.buyer_id).first()
+        buyer = _session.query(User).\
+                filter(User.id==contract.buyer_id).first()
         buyer_un = buyer.user_name
-        seller = _session.query(User).filter(User.id==contract.seller_id).first()
+        seller = _session.query(User).\
+                filter(User.id==contract.seller_id).first()
         seller_un = seller.user_name
         review = _session.query(Review).\
                 filter(Review.id==contract.review_id).first()
@@ -101,9 +101,11 @@ def contract_view(user_id, contract_id):
     else:
         flash('Unaccessible Contract')
         return redirect(url_for('app_views.home'))
-@app_views.route('/users/<user_name>/contracts/create', methods=['GET', 'POST'], strict_slashes=False)
+@app_views.route('/users/<user_name>/contracts/create',
+                 methods=['GET', 'POST'], strict_slashes=False)
 @requires_token
 def contract_create(user_id, user_name):
+    """ Creates a contract """
     if request.method == 'POST':
         r_keys = ['c_type', 'name', 'desc', 'amount']
 
@@ -132,9 +134,11 @@ def contract_create(user_id, user_name):
         return redirect(url_for('app_views.contract_view', contract_id=new_contract.id))
     return render_template('create_con.html', user_name=user_name)
 
-@app_views.route('/<user_name>/contracts', methods=['GET'], strict_slashes=False)
+@app_views.route('/<user_name>/contracts', methods=['GET'],
+                 strict_slashes=False)
 @requires_token
 def get_contracts(user_id, user_name):
+    """ Handles contract viewing and interactions """
     _session = storage.session()
     user = _session.query(User).filter(User.user_name==user_name).first()
     contracts_as_s = _session.query(Contract).\
@@ -147,6 +151,7 @@ def get_contracts(user_id, user_name):
                  methods=['GET'], strict_slashes=False)
 @requires_token
 def dispute_contract(user_id, contract_id):
+    """ Disputing a contract and automatic 0 rating """
     _session = storage.session()
     contract = _session.query(Contract).\
             filter(Contract.id==contract_id).first()
@@ -168,8 +173,10 @@ def dispute_contract(user_id, contract_id):
                  methods=['GET'], strict_slashes=False)
 @requires_token
 def initiate_con(user_id, contract_id):
+    """Initiates tge contract by seller only """
     _session = storage.session()
-    user = _session.query(User).filter(User.id==user_id).first()
+    user = _session.query(User).\
+            filter(User.id==user_id).first()
     contract = _session.query(Contract).\
             filter(Contract.id==contract_id).first()
     if not contract:
@@ -188,6 +195,7 @@ def initiate_con(user_id, contract_id):
                  methods=['GET'], strict_slashes=False)
 @requires_token
 def cancel_con(user_id, contract_id):
+    """ Cancelling a contract """
     _session = storage.session()
     user = _session.query(User).filter(User.id==user_id).first()
     contract = _session.query(Contract).\
@@ -207,6 +215,7 @@ def cancel_con(user_id, contract_id):
                  methods=['GET'], strict_slashes=False)
 @requires_token
 def close_con(user_id, contract_id):
+    """ Closing a contract """
     _session = storage.session()
     user = _session.query(User).filter(User.id==user_id).first()
     contract = _session.query(Contract).\

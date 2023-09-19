@@ -1,3 +1,5 @@
+""" Defined for authentication,
+    @requires_token decorator"""
 from functools import wraps
 from flask import session, redirect, url_for, flash
 from models import storage

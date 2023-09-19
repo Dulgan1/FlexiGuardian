@@ -26,7 +26,8 @@ def login():
     password = data.get('password')
     user = storage.get_user(email)
     if not user:
-        return make_response(jsonify({'message': 'User with email not registered'}))
+        return make_response(jsonify({'message':\
+                'User with email not registered'}))
     user_id = user.id
     user = storage.get(User, user_id)
 
@@ -37,7 +38,8 @@ def login():
                            'exp': datetime.datetime.now() +
                             datetime.timedelta(minutes=30)},
                            getenv('FG_SECRET_KEY'), 'HS256')
-        return jsonify({'token': token})
+        return jsonify({'token': token,
+                        'usage': 'use with header x-access-token'})
 
     return make_response(jsonify({'message': 'Could not verify'}), 400)
 
@@ -136,17 +138,23 @@ def guess_profile_view(user_name):
 
 @api_views.route('/users/<user_name>/profile',
                  methods=['GET', 'PUT'], strict_slashes=False)
-def profile_ract(user_name):
+@requires_token
+def profile_ract(user_id, user_name):
     if request.method == 'GET':
         full_dict = _profile_view(user_name)
         status_code = full_dict.get('status', 501)
         return make_response(jsonify(full_dict), status_code)
     if request.method == 'PUT':
         _session = storage.session()
-        user = _session.query(User).filter(User.user_name==user_name).first()
+        user = _session.query(User).\
+                filter(User.user_name==user_name).first()
+        if user_id != user.id:
+            abort(400, 'Not authorised')
         if request.get_json():
             data = request.get_json()
-            ignore = ['password', 'user_name', 'email', 'created_at', 'id', '__class__']
+            ignore = ['password', 'user_name',
+                      'email', 'created_at',
+                      'id', '__class__']
             for k, v in data.items():
                 if k not in ignore:
                     setattr(user, k, v)
@@ -164,11 +172,13 @@ def business(user_name):
     try:
         _session = storage.session()
         user = _session.query(User).filter(User.user_name==user_name).first()
-        business = _session.query(Business).filter(Business.user_id==user.id).first()
-        address = _session.query(Address).filter(Address.business_id==business.id).first()
+        business = _session.query(Business).\
+                filter(Business.user_id==user.id).first()
+        address = _session.query(Address).\
+                filter(Address.business_id==business.id).first()
         address = address.to_dict()
         full_dict = business.to_dict()
-        ig_keys = ['id', 'user_id', '__class__', 'address']
+        ig_keys = ['id', 'user_id', '__class__']
 
         for key in ig_keys:
             full_dict.pop(key)

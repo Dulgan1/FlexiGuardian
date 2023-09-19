@@ -76,6 +76,7 @@ def register():
                  methods=['GET', 'POST'], strict_slashes=False)
 @requires_token
 def register_business(user_id, user_name):
+    """ Handles new business registration """
     _session = storage.session()
     user_byun = _session.query(User).filter(User.user_name==user_name).first()
     user_byid = _session.query(User).filter(User.id==user_id).first()
@@ -108,6 +109,7 @@ def register_business(user_id, user_name):
             return render_template('business.html', user=user_byid)
 @app_views.route('/users/<user_name>', methods=['GET'], strict_slashes=False)
 def profile(user_name):
+    """ Handles user profile view"""
     _session = storage.session()
     user = _session.query(User).filter(User.user_name==user_name).first()
     business = _session.query(Business).\

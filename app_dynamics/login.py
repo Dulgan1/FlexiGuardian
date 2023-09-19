@@ -1,4 +1,4 @@
-#!/usr/bin/python
+""" Module for Login and authentication """
 from app_dynamics import app_views
 from app_dynamics.auth import requires_token
 from flask import (session, flash,
@@ -8,12 +8,12 @@ from models import storage
 from models.user import User
 from models.business import Business
 from werkzeug.security import check_password_hash
-""" Route Login """
 
 
 @app_views.route('/home', methods=['GET', 'POST'], strict_slashes=False)
 @app_views.route('/', methods=['GET', 'POST'], strict_slashes=False)
 def home():
+    """ Loads home page, both for non-login and logged in"""
     if request.method == 'GET':
         _session = storage.session()
         users = _session.query(User).order_by(User.rating.desc()).all()
@@ -35,6 +35,7 @@ def home():
 
 @app_views.route('/login', methods=['GET', 'POST'], strict_slashes=False)
 def login():
+    """ Handles user login """
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
@@ -59,6 +60,7 @@ def login():
 
 @app_views.route('/logout', methods=['GET'], strict_slashes=False)
 def logout():
+    """ Logging out of the app """
     try:
         session.pop('user_id')
         session.pop('user_name')

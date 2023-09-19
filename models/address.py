@@ -1,3 +1,13 @@
+""" Defines the Address model
+    Inherits from BaseModel and Base (For relational mapping)
+    attr:
+        __tablename__ => name of table in SQL database
+        state => holds state.
+        zipcode => holds zip code.
+        addr_line => holds address line.
+        business_id => business id for which address object belongs to.
+    All attributes are columns in SQL table
+    (Object Relational Mapping) """
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship

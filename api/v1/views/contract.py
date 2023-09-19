@@ -2,18 +2,17 @@
 """Handles routes for contract"""
 from api.v1.views import api_views
 from flask import abort, session, request, make_response, jsonify
-import jwt
 from models.contract import Contract
 from models.user import Review, User
 from models import storage
-
 from api.v1.views.token import requires_token
 
 def calc_tot_rate(user_id):
     """Calculates and stores the rating avg of user"""
     user = storage.get(User, user_id)
     _session = storage.session()
-    reviews = _session.query(Review).filter(Review.for_user_id==user_id).all()
+    reviews = _session.query(Review).\
+            filter(Review.for_user_id==user_id).all()
     total = 0
     count = 0
     for review in reviews:
@@ -30,27 +29,18 @@ def calc_tot_rate(user_id):
 
 @api_views.route('/contracts/<contract_id>/rate',
            methods=['POST'], strict_slashes=False)
-def rate_contract(contract_id):
-    """Rating and review of contract by Buyer"""
+@requires_token
+def rate_contract(user_id, contract_id):
+    """Handles rating and review of contract by Buyer"""
     if not request.get_json():
         abort(400, 'Not a JSON')
 
     _session = storage.session()
-
-    """try:
-        user_id = session['user_id']
-    except:
-        token = request.headers['x-access-tokens']
-        data = jwt.decode(token, app.config['SECRET_KEY'])
-        user_id = data['user_id']
-    else:
-        return make_response(jsonify({'message': 'Login required'}), 400)"""
-
     contract = _session.query(Contract).\
             filter(Contract.id==contract_id).first()
     if not contract:
         abort(404, 'Contract Not Found')
-    if request.get_json()['buyer_id'] == contract.buyer_id:
+    if user_id == contract.buyer_id:
         req = request.get_json()
         if 'rate' not in req.keys() and 'review' not in req.keys():
             return make_response(jsonify({'error': 'Invalid data for rating',
@@ -65,27 +55,19 @@ def rate_contract(contract_id):
         storage.new(new_review)
         storage.save()
         calc_tot_rate(seller_id)
-        return make_response(jsonify({'message': 'Rated and reviews successfully'}), 200)
+        return make_response(jsonify({'message': 'Rated and reviewes successfully'}), 200)
     return make_response(jsonify({'error': 'Error updating data'}), 501)
 
 @api_views.route('/contracts/<contract_id>/initiate',
                  methods=['POST'], strict_slashes=False)
-def initiate_con(contract_id):
+@requires_token
+def initiate_con(user_id, contract_id):
     """Initiate contract by Seller, request => {"status": "ongoing"}"""
     if not request.get_json():
         abort(400, 'Not a JSON')
     if 'status' not in request.get_json().keys():
         abort(400, 'Invalid data')
     _session = storage.session()
-    """try:
-        user_id = session['user_id']
-    except:
-        token = request.headers['x-access-tokens']
-        data = jwt.decode(token, app.config['SECRET_KEY'])
-        user_id = data['user_id']
-    else:
-        return make_response(jsonify({'message': 'Login required'}), 400)
-    contract = _session.query(Contract).filter(Contract.id==contract_id).first()"""
     if not contract:
         abort(404, 'Contract Not Found')
     req = request.get_json()
@@ -94,23 +76,16 @@ def initiate_con(contract_id):
         for k, v in req.items():
             setattr(contract, k, v)
         storage.save()
-        return make_response(jsonify({'message': 'Contract updated sucessfully'}),
-                             200)
+        return make_response(jsonify({'message':\
+                                      'Contract updated sucessfully'}), 200)
     else:
         abort(400, 'Login rquired')
 
 @api_views.route('/contracts/<contract_id>', methods=['GET'],
                  strict_slashes=False)
-def contract_view(contract_id):
+@requires_token
+def contract_view(user_id, contract_id):
     """View Contract by Seller or Buyer"""
-    try:
-        user_id = session['user_id']
-    except:
-        token = request.headers['x-access-tokens']
-        data = jwt.decode(token, app.config['SECRET_KEY'])
-        user_id = data['user_id']
-    else:
-        return make_response(jsonify({'message': 'Login required'}), 400)
 
     _session = storage.session()
     contract = _session.query(Contract).\
@@ -122,16 +97,11 @@ def contract_view(contract_id):
     else:
         abort(400)
 @api_views.route('/contracts/create', methods=['POST'], strict_slashes=False)
-def contract_create():
+@requires_token
+def contract_create(user_id):
     """User create Contract as Buyer"""
-    """try:
-        user_id = session['user_id']
-    except:
-        token = request.headers['x-access-tokens']
-        data = jwt.decode(token, app.config['SECRET_KEY'])
-        user_id = data['user_id']
-    else:
-        make_response(jsonify({'message': 'Login required'}), 400)"""
+    if not user_id:
+        abort(400, 'Login required')
     if not request.get_json():
         abort(400, 'Not a JSON')
 
@@ -148,10 +118,14 @@ def contract_create():
     c_type = req['c_type']
     seller= req['s_user']
     buyer = req['b_user']
-    s_user = _session.query(User).filter(User.user_name==seller).first()
-    b_user = _session.query(User).filter(User.user_name==buyer).first()
+    s_user = _session.query(User).\
+            filter(User.user_name==seller).first()
+    b_user = _session.query(User).\
+            filter(User.user_name==buyer).first()
     seller_id = s_user.id
     buyer_id = b_user.id
+    if user_id != buyer_id:
+        abort(400, 'Login required, unathorised')
     name = req['name']
     descr = req['desc']
     status = 'created'
@@ -162,20 +136,17 @@ def contract_create():
                             status=status, amount=amount)
     storage.new(new_contract)
     storage.save()
-    return make_response(jsonify({'messaege': 'Contract Created Successfully'}),
-                         200)
+    return make_response(jsonify({'messaege':\
+            'Contract Created Successfully'}), 200)
 
 @api_views.route('/contracts/<contract_id>/dispute',
                  methods=['POST'], strict_slashes=False)
-def dispute_contract(contract_id):
+@requires_token
+def dispute_contract(user_id, contract_id):
     """Buyer(User) sets contract status to disputed and automatically
     send 0 rating review with issue as review"""
     if not request.get_json():
         abort(400, 'Not a JSON')
-
-    """try:                                                                                        user_id = session['user_id']                                                        except:
-        token = request.headers['x-access-tokens']                                              data = jwt.decode(token, app.config['SECRET_KEY'])                                      user_id = data['user_id']                                                           else:
-        make_response(jsonify({'message': 'Login required'}), 400)"""
 
     contract = _session.query(Contract).\
             filter(Contract.id==contract_id).first()
@@ -192,21 +163,30 @@ def dispute_contract(contract_id):
         contract.status = 'disputed'
         storage.new(review)
         storage.save()
-        return make_reponse(jsonify({'message': 'Dispute review sent successfully'}), 200)
+        return make_reponse(jsonify({'message':\
+                'Dispute review sent successfully'}), 200)
     abort(500)
 
 @api_views.route('/<user_name>/contracts', methods=['GET'], strict_slashes=False)
-def get_contracts(user_name):
+@requires_token
+def get_contracts(user_id, user_name):
     _session = storage.session()
-    user = _session.query(User).filter(User.user_name==user_name).first()
-    contracts_as_s = _session.query(Contract).filter(Contract.seller_id==user.id).all()
-    contracts_as_b = _session.query(Contract).filter(Contract.buyer_id==user.id).all()
+    user = _session.query(User).\
+            filter(User.user_name==user_name).first()
+    if user_id != user.id:
+        abort(400, 'Not authorised')
+    contracts_as_s = _session.query(Contract).\
+            filter(Contract.seller_id==user.id).all()
+    contracts_as_b = _session.query(Contract).\
+            filter(Contract.buyer_id==user.id).all()
     as_s_list = []
     as_b_list = []
     for con in contracts_as_s:
         con = con.to_dict()
-        user_as_b = _session.query(User).filter(User.id==con['buyer_id']).first()
-        user_as_s = _session.query(User).filter(User.id==con['seller_id']).first()
+        user_as_b = _session.query(User).\
+                filter(User.id==con['buyer_id']).first()
+        user_as_s = _session.query(User).\
+                filter(User.id==con['seller_id']).first()
         user_as_s = user_as_s.user_name
         user_as_b = user_as_b.user_name
         con['user_as_b'] = user_as_b
@@ -214,8 +194,10 @@ def get_contracts(user_name):
         as_s_list.append(con)
     for con in contracts_as_b:
         con = con.to_dict()
-        user_as_b = _session.query(User).filter(User.id==con['buyer_id']).first()
-        user_as_s = _session.query(User).filter(User.id==con['seller_id']).first()
+        user_as_b = _session.query(User).\
+                filter(User.id==con['buyer_id']).first()
+        user_as_s = _session.query(User).\
+                filter(User.id==con['seller_id']).first()
         user_as_s = user_as_s.user_name
         user_as_b = user_as_b.user_name
         con['user_as_b'] = user_as_b

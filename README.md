@@ -11,9 +11,16 @@ y and a desire to make a safe hub for vendors, service providers and customers, 
 uce fraudulent activities as well as ensure quality for customers and business promotion.
 
 ### The Context
+This project is my Portfolio Project, concluding my Foundations track at ALX software Engineering program powered by Holberton School. I came up with what I wanted to work on, as long as I present a working program at the end of the three weeks of development.
+
 ### The Developer
+1. **Dulgan Danjuma** [@DanjumaDulgan]('https://twitter.com/DanjumaDulgan'), [Linckedin]('https://www.linkedin.com/in/dulgan-danjuma')
+
 ### The Blog Post
+1. Under construction
+2. Landing page at [github-pages]('https://dulgan1.github.io/FlexiGuardian/landing_page')
 ## Tutorial
+Visit the landing page for a quick overview at [Landing Page]('https://dulgan1.github.io/FlexiGuardian/landing_page')
 ## Architecture
 ### Overview
 ### Flask
