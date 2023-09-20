@@ -23,7 +23,10 @@ This project is my Portfolio Project, concluding my Foundations track at ALX sof
 Visit the landing page for a quick overview at [Landing Page](https://dulgan1.github.io/FlexiGuardian/landing_page)
 ## Architecture
 ### Overview
+This web app is a simple app, coded mainly in Python. FlexiGuardian is back-end heavy, meaning that I focused my time and energy in developping a simple but easy to use functional app.
+
 ### Flask
+
 #### List Of Views
 ### Gunicorn and Nginx
 ### SQLAlchemy and MySQL
